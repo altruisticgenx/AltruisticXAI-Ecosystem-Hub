@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 import LayoutShell from "@/components/LayoutShell"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -10,7 +11,6 @@ import DiscoveryLoadingSkeleton from "@/components/DiscoveryLoadingSkeleton"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
-import { useState } from "react"
 import { toast } from "sonner"
 
 export default function LabsPage() {

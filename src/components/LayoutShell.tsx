@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect } from "react"
+import React, { ReactNode, useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { Flask, Briefcase, Scroll, ChartBar, List, Database } from "@phosphor-icons/react"

@@ -1,3 +1,4 @@
+import React from "react"
 import { Link } from "react-router-dom"
 import { projects } from "@/data/projects"
 import { Flask, Briefcase, Scroll, Sparkle, ArrowRight, Buildings, GraduationCap, Users, Database, CheckCircle } from "@phosphor-icons/react"

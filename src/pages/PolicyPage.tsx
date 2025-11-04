@@ -1,3 +1,5 @@
+import React from "react"
+import { Link } from "react-router-dom"
 import LayoutShell from "@/components/LayoutShell"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -5,7 +7,6 @@ import { Button } from "@/components/ui/button"
 import { policyMemos } from "@/data/policyMemos"
 import { projects } from "@/data/projects"
 import { Scroll, CheckCircle, Clock, Rocket } from "@phosphor-icons/react"
-import { Link } from "react-router-dom"
 
 export default function PolicyPage() {
   const getProjectTitle = (projectId: string) => {

@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 import LayoutShell from "@/components/LayoutShell"
 import ImpactTable from "@/components/ImpactTable"
 import CrawledProjectCard from "@/components/CrawledProjectCard"
@@ -10,7 +11,6 @@ import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useDataCrawler } from "@/hooks/use-data-crawler"
 import { toast } from "sonner"
 import { validateData } from "@/data-ingest/validate"
-import { useState } from "react"
 
 function getLastUpdated(crawlerData: any) {
   if (!crawlerData?.lastIngestTimestamp) return null

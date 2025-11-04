@@ -1,3 +1,4 @@
+import React, { useState } from "react"
 import LayoutShell from "@/components/LayoutShell"
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
@@ -7,7 +8,6 @@ import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/
 import MetricPill from "@/components/MetricPill"
 import { projects } from "@/data/projects"
 import { Briefcase, ArrowRight, CheckCircle, TrendUp, Sparkle, Rocket, Building, EnvelopeSimple, CalendarCheck, ChartBar, Funnel } from "@phosphor-icons/react"
-import { useState } from "react"
 
 const serviceTiers = [
   {
