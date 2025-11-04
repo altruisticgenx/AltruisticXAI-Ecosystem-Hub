@@ -5,10 +5,11 @@ A comprehensive digital platform that demonstrates the self-reinforcing flywheel
 **Experience Qualities**:
 1. **Trustworthy**: Clear transparency in methods, metrics, and outcomes builds credibility with technical and policy audiences
 2. **Empowering**: Real-time AI discovery tools enable users to actively participate in finding aligned ethical AI projects
-3. **Professional**: Clean, modern design reflects the serious mission while remaining accessible to diverse stakeholders
+3. **Professional**: Clean, modern design with consistent styling across all pages reflects the serious mission while remaining accessible and conversion-focused
+4. **Conversion-Optimized**: Every page includes clear CTAs, value propositions, and pathways to engagement
 
 **Complexity Level**: Light Application (multiple features with basic state)
-The platform combines static content showcase with dynamic features including real-time API integration, AI-powered analysis, and persistent user data. It balances informational content with interactive discovery tools without requiring user authentication or complex workflows.
+The platform combines static content showcase with dynamic features including real-time API integration, AI-powered analysis, and persistent user data. It balances informational content with interactive discovery tools without requiring user authentication or complex workflows. All pages use a unified layout shell with consistent navigation, footer, and styling.
 
 ## Essential Features
 
@@ -19,26 +20,40 @@ The platform combines static content showcase with dynamic features including re
 - **Progression**: Select topic → Click discover → API fetches repos → AI analyzes each → Filter by relevance → Display results → Save to persistent storage
 - **Success criteria**: Successfully retrieves projects, AI scores relevance, displays high-quality matches (60%+ score), persists between sessions
 
-### Feature 2: Multi-Arm Content Showcase
-- **Functionality**: Displays comprehensive information about Labs, Consulting, and Policy initiatives
-- **Purpose**: Communicates the flywheel model and demonstrates real-world impact
-- **Trigger**: Navigation through site pages
-- **Progression**: Land on home → Understand flywheel → Explore specific arm → View projects/case studies → See metrics
-- **Success criteria**: Clear value proposition, quantified outcomes visible, logical flow between arms
+### Feature 2: Unified Layout & Navigation
+- **Functionality**: Consistent header, navigation, and footer across all pages with responsive design
+- **Purpose**: Provides seamless navigation experience and reinforces brand identity throughout the platform
+- **Trigger**: Loading any page or navigating between sections
+- **Progression**: Page loads → Header displays with logo and nav → Content renders → Footer provides CTAs and quick links
+- **Success criteria**: Consistent styling, smooth page transitions, mobile-responsive menu, accessible navigation on all devices
 
-### Feature 3: Impact Ledger
-- **Functionality**: Chronological record of milestones with filtering by type
+### Feature 3: Multi-Arm Content Showcase
+- **Functionality**: Displays comprehensive information about Labs, Consulting, and Policy initiatives
+- **Purpose**: Communicates the flywheel model and demonstrates real-world impact with conversion-focused messaging
+- **Trigger**: Navigation through site pages
+- **Progression**: Land on home → Understand flywheel → Explore specific arm → View projects/case studies → See metrics → Engage via CTA
+- **Success criteria**: Clear value proposition, quantified outcomes visible, logical flow between arms, prominent CTAs on every page
+
+### Feature 4: Impact Ledger
+- **Functionality**: Chronological record of milestones with mobile-responsive filtering by type
 - **Purpose**: Provides transparent evidence of organizational impact
 - **Trigger**: Navigate to Impact page or view latest events on homepage
 - **Progression**: View all events → Filter by type → See metrics → Understand flywheel connections
-- **Success criteria**: Easy filtering, clear metrics, demonstrates interconnected impact
+- **Success criteria**: Easy filtering on all devices, clear metrics, demonstrates interconnected impact, responsive tab layout
 
-### Feature 4: Project Persistence & Management
+### Feature 5: Project Persistence & Management
 - **Functionality**: Saves discovered projects locally, allows removal and clearing
 - **Purpose**: Enables users to build their own curated collection of relevant projects
 - **Trigger**: Projects auto-save on discovery, manual removal via UI
 - **Progression**: Discover project → Auto-saved → View anytime → Remove if not relevant → Clear all if needed
 - **Success criteria**: Data persists across sessions, removal works instantly, no data loss
+
+### Feature 6: Conversion-Optimized CTAs
+- **Functionality**: Strategic placement of calls-to-action throughout all pages
+- **Purpose**: Drive user engagement and generate leads for consulting services
+- **Trigger**: User reads content and reaches decision points
+- **Progression**: Learn about services → See value proposition → Encounter CTA → Take action (book call, email, view impact)
+- **Success criteria**: CTAs are prominent, contextually relevant, and provide multiple engagement pathways
 
 ## Edge Case Handling
 

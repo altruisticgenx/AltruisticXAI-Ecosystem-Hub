@@ -60,20 +60,19 @@ export default function ConsultingPage() {
 
   return (
     <LayoutShell>
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="mb-16 text-center">
           <div className="mb-4 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-secondary/10">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-secondary/15 to-secondary/5 shadow-lg ring-1 ring-secondary/20">
               <Briefcase size={32} weight="duotone" className="text-secondary" />
             </div>
           </div>
-          <h1 className="mb-4 text-5xl font-bold tracking-tight text-foreground">
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Consulting Studio
           </h1>
-          <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl">
             We adapt our proven open-source tools for institutions that need ethical AI solutions. 
-            Our clients benefit from battle-tested technology while funding new Labs research and 
-            generating evidence for policy advocacy.
+            <span className="font-medium text-foreground"> Our clients benefit from battle-tested technology while funding new Labs research and generating evidence for policy advocacy.</span>
           </p>
         </div>
 
@@ -290,20 +289,20 @@ export default function ConsultingPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border-2 border-primary/20 bg-primary/5 p-8 md:p-12">
+        <div className="rounded-2xl border-2 border-secondary/20 bg-gradient-to-br from-secondary/10 via-secondary/5 to-transparent p-8 md:p-12">
           <div className="mx-auto max-w-3xl text-center">
-            <Briefcase size={48} weight="duotone" className="mx-auto mb-6 text-primary" />
-            <h3 className="mb-4 text-3xl font-bold text-foreground">
+            <Briefcase size={56} weight="duotone" className="mx-auto mb-6 text-secondary" />
+            <h3 className="mb-4 text-3xl font-bold text-foreground sm:text-4xl">
               Ready to Deploy Ethical AI?
             </h3>
-            <p className="mb-8 text-lg text-muted-foreground">
+            <p className="mb-8 text-base leading-relaxed text-muted-foreground sm:text-lg">
               We work with universities, healthcare systems, and government agencies to implement 
-              privacy-preserving AI, energy transparency tools, and compliance frameworks. Let's discuss 
-              how our proven solutions can address your specific challenges.
+              privacy-preserving AI, energy transparency tools, and compliance frameworks. 
+              <span className="font-medium text-foreground"> Let's discuss how our proven solutions can address your specific challenges.</span>
             </p>
             
             <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
-              <Button size="lg" asChild>
+              <Button size="lg" asChild className="w-full sm:w-auto">
                 <a 
                   href="https://scheduler.zoom.us/altruistic-xai/altruisticxai-booking" 
                   target="_blank" 
@@ -311,29 +310,31 @@ export default function ConsultingPage() {
                   className="gap-2"
                 >
                   <CalendarCheck size={20} weight="duotone" />
-                  Book a Call
+                  Schedule Discovery Call
                 </a>
               </Button>
-              <Button size="lg" variant="outline" asChild>
+              <Button size="lg" variant="outline" asChild className="w-full sm:w-auto">
                 <a 
                   href="mailto:consulting@altruisticxai.org"
                   className="gap-2"
                 >
                   <EnvelopeSimple size={20} weight="duotone" />
-                  Email Us
+                  Email Our Team
                 </a>
               </Button>
             </div>
 
-            <p className="text-sm text-muted-foreground">
-              <span className="font-medium">Contact:</span>{" "}
-              <a 
-                href="mailto:consulting@altruisticxai.org" 
-                className="text-primary underline-offset-4 hover:underline"
-              >
-                consulting@altruisticxai.org
-              </a>
-            </p>
+            <div className="rounded-lg bg-background/60 p-4 backdrop-blur-sm">
+              <p className="text-sm text-muted-foreground">
+                <span className="font-semibold text-foreground">Direct Contact:</span>{" "}
+                <a 
+                  href="mailto:consulting@altruisticxai.org" 
+                  className="text-secondary underline-offset-4 transition-colors hover:text-foreground hover:underline"
+                >
+                  consulting@altruisticxai.org
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </div>

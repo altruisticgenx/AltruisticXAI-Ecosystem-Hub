@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button"
 import { policyMemos } from "@/data/policyMemos"
 import { projects } from "@/data/projects"
 import { Scroll, CheckCircle, Clock, Rocket } from "@phosphor-icons/react"
+import { Link } from "react-router-dom"
 
 export default function PolicyPage() {
   const getProjectTitle = (projectId: string) => {
@@ -24,20 +25,20 @@ export default function PolicyPage() {
 
   return (
     <LayoutShell>
-      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
         <div className="mb-16 text-center">
           <div className="mb-4 flex justify-center">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-accent/10">
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/15 to-accent/5 shadow-lg ring-1 ring-accent/20">
               <Scroll size={32} weight="duotone" className="text-accent" />
             </div>
           </div>
-          <h1 className="mb-4 text-5xl font-bold tracking-tight text-foreground">
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Policy Alliance
           </h1>
-          <p className="mx-auto max-w-2xl text-xl text-muted-foreground">
+          <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl">
             We transform real-world implementation results into evidence-based policy recommendations. 
-            By documenting measurable outcomes from our Labs projects and consulting engagements, 
-            we advocate for structural changes that scale ethical AI beyond individual organizations.
+            <span className="font-medium text-foreground"> By documenting measurable outcomes from our Labs projects and consulting engagements, 
+            we advocate for structural changes that scale ethical AI beyond individual organizations.</span>
           </p>
         </div>
 
@@ -302,19 +303,26 @@ export default function PolicyPage() {
           )}
         </div>
 
-        <div className="mt-16 rounded-2xl border-2 border-accent/20 bg-accent/5 p-8 text-center">
-          <Scroll size={48} weight="duotone" className="mx-auto mb-4 text-accent" />
-          <h3 className="mb-3 text-2xl font-semibold text-foreground">
+        <div className="mt-16 rounded-2xl border-2 border-accent/20 bg-gradient-to-br from-accent/10 via-accent/5 to-transparent p-8 text-center sm:p-10">
+          <Scroll size={56} weight="duotone" className="mx-auto mb-4 text-accent" />
+          <h3 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl">
             Partner on Policy Research
           </h3>
-          <p className="mx-auto mb-6 max-w-2xl text-muted-foreground">
+          <p className="mx-auto mb-6 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
             Are you working on AI governance, transparency standards, or privacy regulations? 
-            We can provide technical expertise and real-world case studies to support evidence-based 
-            policy development. Let's collaborate to create implementable standards.
+            <span className="font-medium text-foreground"> We can provide technical expertise and real-world case studies to support evidence-based 
+            policy development. Let's collaborate to create implementable standards.</span>
           </p>
-          <Button size="lg" variant="default">
-            Discuss Policy Partnership
-          </Button>
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button size="lg" variant="default" className="touch-manipulation">
+              Discuss Policy Partnership
+            </Button>
+            <Button size="lg" variant="outline" asChild className="touch-manipulation">
+              <Link to="/impact-ledger">
+                View Evidence Base
+              </Link>
+            </Button>
+          </div>
         </div>
       </div>
     </LayoutShell>

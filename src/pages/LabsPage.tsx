@@ -48,15 +48,16 @@ export default function LabsPage() {
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
         <div className="mb-12 text-center sm:mb-16">
           <div className="mb-4 flex justify-center">
-            <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary/10 sm:h-16 sm:w-16">
-              <Flask size={28} weight="duotone" className="text-primary sm:h-8 sm:w-8" />
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/15 to-primary/5 shadow-lg ring-1 ring-primary/20">
+              <Flask size={32} weight="duotone" className="text-primary" />
             </div>
           </div>
-          <h1 className="mb-4 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
+          <h1 className="mb-4 text-4xl font-bold tracking-tight text-foreground sm:text-5xl lg:text-6xl">
             Open Source Labs
           </h1>
           <p className="mx-auto max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl">
-            Experimental projects pushing the boundaries of explainable AI, energy transparency, and ethical technology.
+            Experimental projects pushing the boundaries of explainable AI, energy transparency, and ethical technology. 
+            <span className="font-medium text-foreground"> All code is public, reproducible, and ready to deploy.</span>
           </p>
         </div>
 
@@ -319,18 +320,29 @@ export default function LabsPage() {
           </TabsContent>
         </Tabs>
 
-        <div className="mt-12 rounded-2xl border-2 border-primary/20 bg-primary/5 p-6 text-center sm:mt-16 sm:p-8">
-          <Rocket size={40} weight="duotone" className="mx-auto mb-3 text-primary sm:mb-4 sm:h-12 sm:w-12" />
-          <h3 className="mb-2 text-xl font-semibold text-foreground sm:mb-3 sm:text-2xl">
+        <div className="mt-12 rounded-2xl border-2 border-primary/20 bg-gradient-to-br from-primary/10 via-primary/5 to-transparent p-6 text-center sm:mt-16 sm:p-10">
+          <Rocket size={48} weight="duotone" className="mx-auto mb-4 text-primary sm:h-14 sm:w-14" />
+          <h3 className="mb-3 text-2xl font-bold text-foreground sm:text-3xl">
             Have an idea for a Labs project?
           </h3>
-          <p className="mx-auto mb-4 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:mb-6 sm:text-base">
+          <p className="mx-auto mb-6 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
             We're always looking for new challenges in AI transparency, privacy-preserving ML, and sustainable technology. 
-            Reach out to discuss potential collaborations.
+            <span className="font-medium text-foreground"> Partner with us to turn research into reality.</span>
           </p>
-          <Button size="lg" variant="default" className="touch-manipulation">
-            Get in Touch
-          </Button>
+          <div className="flex flex-col gap-3 sm:flex-row sm:justify-center">
+            <Button size="lg" variant="default" className="touch-manipulation">
+              Propose a Collaboration
+            </Button>
+            <Button size="lg" variant="outline" asChild className="touch-manipulation">
+              <a 
+                href="https://github.com/altruisticxai-labs" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                Browse on GitHub
+              </a>
+            </Button>
+          </div>
         </div>
       </div>
     </LayoutShell>

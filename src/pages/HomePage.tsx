@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { motion, useReducedMotion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
+import LayoutShell from "@/components/LayoutShell"
 
 const pillars = [
   {
@@ -87,7 +88,7 @@ export default function HomePage() {
   }
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <LayoutShell>
       <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
         <motion.div 
           className="absolute -top-24 left-[-8%] h-56 w-56 rounded-full bg-primary/8 blur-3xl sm:-top-32 sm:h-64 sm:w-64"
@@ -116,47 +117,7 @@ export default function HomePage() {
         />
       </div>
 
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-12 pt-4 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-6 lg:gap-16 lg:px-8 lg:pb-20 lg:pt-8">
-        <motion.header 
-          className="flex items-center justify-between gap-3 py-2 sm:gap-4 sm:py-3"
-          initial="hidden"
-          animate="visible"
-          variants={fadeIn}
-        >
-          <Link to="/" className="flex items-center gap-2.5 sm:gap-3">
-            <motion.div 
-              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-primary/80 shadow-md ring-1 ring-primary/20 sm:h-10 sm:w-10"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="text-xs font-bold tracking-tight text-primary-foreground sm:text-sm">AX</span>
-            </motion.div>
-            <div className="flex flex-col leading-tight">
-              <span className="text-xs font-semibold text-foreground sm:text-sm">AltruisticXAI Ecosystem</span>
-              <span className="hidden text-[10px] text-muted-foreground sm:block sm:text-[11px]">
-                Labs · Consulting · Policy · Impact
-              </span>
-            </div>
-          </Link>
-
-          <nav className="hidden items-center gap-1 text-xs sm:flex sm:gap-2">
-            {pillars.map((pillar) => (
-              <Link
-                key={pillar.id}
-                to={pillar.href}
-                className="rounded-full px-3 py-1.5 text-muted-foreground transition-all hover:bg-muted hover:text-foreground active:scale-95"
-              >
-                {pillar.name.split(' ').pop()}
-              </Link>
-            ))}
-            <Link
-              to="/impact-ledger"
-              className="rounded-full border border-primary/30 bg-primary/5 px-3 py-1.5 text-primary transition-all hover:border-primary hover:bg-primary/10 active:scale-95"
-            >
-              Impact Ledger
-            </Link>
-          </nav>
-        </motion.header>
+      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-12 pt-8 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-12 lg:gap-16 lg:px-8 lg:pb-20 lg:pt-16">
 
         <motion.section 
           className="space-y-6 sm:space-y-7 lg:space-y-8"
@@ -170,7 +131,7 @@ export default function HomePage() {
               <span>Local-first AI · Energy · Education · Governance</span>
             </Badge>
 
-            <h1 className="mb-3 text-balance text-3xl font-semibold leading-tight tracking-tight sm:mb-4 sm:text-4xl lg:text-5xl">
+            <h1 className="mb-3 text-balance text-4xl font-bold leading-tight tracking-tight sm:mb-4 sm:text-5xl lg:text-6xl">
               Turn{" "}
               <span className="bg-gradient-to-r from-primary via-primary/90 to-secondary bg-clip-text text-transparent">
                 open tools
@@ -182,11 +143,11 @@ export default function HomePage() {
               that actually ship.
             </h1>
             
-            <p className="max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl">
               AltruisticXAI is a connected ecosystem: we ship{" "}
-              <span className="font-medium text-foreground">open-source labs</span>, run{" "}
-              <span className="font-medium text-foreground">ROI-positive consulting pilots</span>, and translate what works into{" "}
-              <span className="font-medium text-foreground">durable funding and rules</span>. One flywheel—from GitHub, to campus, to statehouse.
+              <span className="font-semibold text-foreground">open-source labs</span>, run{" "}
+              <span className="font-semibold text-foreground">ROI-positive consulting pilots</span>, and translate what works into{" "}
+              <span className="font-semibold text-foreground">durable funding and rules</span>. One flywheel—from GitHub, to campus, to statehouse.
             </p>
           </motion.div>
 
@@ -194,17 +155,17 @@ export default function HomePage() {
             <Button 
               asChild 
               size="lg"
-              className="w-full rounded-full bg-primary text-sm font-semibold shadow-md transition-all hover:bg-primary/90 hover:shadow-lg active:scale-[0.98] sm:w-auto sm:px-6"
+              className="w-full rounded-full bg-primary text-sm font-semibold shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl hover:scale-105 active:scale-[0.98] sm:w-auto sm:px-8"
             >
               <Link to="/consulting">
-                Book an ecosystem intro call
+                Book an Ecosystem Intro Call
               </Link>
             </Button>
             <Button 
               asChild 
               variant="outline" 
               size="lg"
-              className="group w-full rounded-full border-border text-sm font-semibold transition-all hover:border-primary hover:bg-primary/5 hover:text-primary active:scale-[0.98] sm:w-auto sm:px-6"
+              className="group w-full rounded-full border-border text-sm font-semibold shadow-sm transition-all hover:border-primary hover:bg-primary/5 hover:text-primary hover:shadow-md active:scale-[0.98] sm:w-auto sm:px-8"
             >
               <Link to="/impact-ledger" className="flex items-center gap-1.5">
                 Browse the Impact Ledger
@@ -398,7 +359,7 @@ export default function HomePage() {
           </motion.div>
         </motion.section>
       </div>
-    </main>
+    </LayoutShell>
   )
 }
 
