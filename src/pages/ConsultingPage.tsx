@@ -89,7 +89,7 @@ export default function ConsultingPage() {
         <div className="mb-12 text-center">
           <div className="mb-3 flex justify-center">
             <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-secondary/15 to-secondary/5 shadow-lg ring-1 ring-secondary/20 sm:h-14 sm:w-14">
-              <Briefcase size={24} weight="duotone" className="text-secondary sm:size-28" />
+              <Briefcase size={24} weight="duotone" className="text-secondary sm:h-7 sm:w-7" />
             </div>
           </div>
           <h1 className="mb-3 text-3xl font-bold tracking-tight text-foreground sm:text-4xl lg:text-5xl">
@@ -351,7 +351,7 @@ export default function ConsultingPage() {
 
         <div className="rounded-xl border border-secondary/20 bg-gradient-to-br from-secondary/10 via-secondary/5 to-transparent p-6 sm:p-8">
           <div className="mx-auto max-w-3xl text-center">
-            <Briefcase size={36} weight="duotone" className="mx-auto mb-4 text-secondary sm:size-40" />
+            <Briefcase size={36} weight="duotone" className="mx-auto mb-4 text-secondary sm:h-10 sm:w-10" />
             <h3 className="mb-3 text-xl font-bold text-foreground sm:text-2xl">
               Ready to Deploy Ethical AI?
             </h3>

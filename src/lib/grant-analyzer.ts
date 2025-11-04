@@ -15,37 +15,42 @@ export interface GrantAnalysis {
 }
 
 export async function analyzeGrantAlignment(grant: GrantOpportunity): Promise<GrantAnalysis> {
-  const promptText = `You are an expert grant analyst for AltruisticXAI, an organization with three pillars:
-1. Open Source Labs - builds transparent, local-first AI tools
-2. Consulting Studio - deploys ROI-positive pilots for universities, utilities, and cities
-3. Policy Alliance - converts pilots into durable funding and policy
-
-Analyze this grant opportunity for strategic alignment:
-
-Title: ${grant.opportunityTitle}
-Agency: ${grant.agencyName}
-Description: ${grant.description.slice(0, 1000)}
-Funding Range: $${grant.awardFloor || 'Unknown'} - $${grant.awardCeiling || 'Unknown'}
-Eligible Applicants: ${grant.eligibleApplicants.join(', ')}
-Category: ${grant.opportunityCategory}
-
-Provide a strategic analysis as JSON with this structure:
-{
-  "alignmentScore": <number 0-100>,
-  "strategicFit": <"excellent" | "good" | "moderate" | "poor">,
-  "recommendedPillar": <"labs" | "consulting" | "policy" | "cross-pillar">,
-  "keyStrengths": [<array of 2-4 specific strengths matching our mission>],
-  "potentialChallenges": [<array of 2-3 realistic challenges>],
-  "actionableInsights": <one concise paragraph with specific next steps>,
-  "estimatedEffort": <"low" | "medium" | "high">,
-  "winProbability": <number 0-100>,
-  "strategicValue": <one sentence explaining long-term ecosystem value>
-}
-
-Focus on alignment with: local-first AI, energy transparency, education, ethical AI governance, and the Labs→Consulting→Policy flywheel.`
+  const description = grant.description.slice(0, 1000)
+  const floor = grant.awardFloor || 'Unknown'
+  const ceiling = grant.awardCeiling || 'Unknown'
+  const applicants = grant.eligibleApplicants.join(', ')
+  
+  const promptParts = [
+    'You are an expert grant analyst for AltruisticXAI, an organization with three pillars:\n',
+    '1. Open Source Labs - builds transparent, local-first AI tools\n',
+    '2. Consulting Studio - deploys ROI-positive pilots for universities, utilities, and cities\n',
+    '3. Policy Alliance - converts pilots into durable funding and policy\n\n',
+    'Analyze this grant opportunity for strategic alignment:\n\n',
+    `Title: ${grant.opportunityTitle}\n`,
+    `Agency: ${grant.agencyName}\n`,
+    `Description: ${description}\n`,
+    `Funding Range: $${floor} - $${ceiling}\n`,
+    `Eligible Applicants: ${applicants}\n`,
+    `Category: ${grant.opportunityCategory}\n\n`,
+    'Provide a strategic analysis as JSON with this structure:\n',
+    '{\n',
+    '  "alignmentScore": <number 0-100>,\n',
+    '  "strategicFit": <"excellent" | "good" | "moderate" | "poor">,\n',
+    '  "recommendedPillar": <"labs" | "consulting" | "policy" | "cross-pillar">,\n',
+    '  "keyStrengths": [<array of 2-4 specific strengths matching our mission>],\n',
+    '  "potentialChallenges": [<array of 2-3 realistic challenges>],\n',
+    '  "actionableInsights": <one concise paragraph with specific next steps>,\n',
+    '  "estimatedEffort": <"low" | "medium" | "high">,\n',
+    '  "winProbability": <number 0-100>,\n',
+    '  "strategicValue": <one sentence explaining long-term ecosystem value>\n',
+    '}\n\n',
+    'Focus on alignment with: local-first AI, energy transparency, education, ethical AI governance, and the Labs→Consulting→Policy flywheel.'
+  ]
+  
+  const prompt = promptParts.join('')
 
   try {
-    const result = await window.spark.llm(promptText, 'gpt-4o', true)
+    const result = await window.spark.llm(prompt, 'gpt-4o', true)
     const parsed = JSON.parse(result)
     
     return {

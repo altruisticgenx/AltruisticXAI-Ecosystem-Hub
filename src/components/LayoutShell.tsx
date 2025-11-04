@@ -1,7 +1,7 @@
 import { ReactNode, useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
-import { Flask, Briefcase, Scroll, ChartBar, List, X, Database } from "@phosphor-icons/react"
+import { Flask, Briefcase, Scroll, ChartBar, List, Database } from "@phosphor-icons/react"
 import { useIsMobile } from "@/hooks/use-mobile"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetHeader, SheetTitle, SheetTrigger } from "@/components/ui/sheet"

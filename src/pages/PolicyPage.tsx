@@ -106,7 +106,7 @@ export default function PolicyPage() {
         <div className="space-y-12">
           {enactedMemos.length > 0 && (
             <div>
-              <h3 className="mb-4 text-2xl font-semibold text-foreground flex items-center gap-2">
+              <h3 className="mb-4 flex items-center gap-2 text-2xl font-semibold text-foreground">
                 <CheckCircle size={24} weight="duotone" className="text-primary" />
                 Enacted
               </h3>
@@ -172,7 +172,7 @@ export default function PolicyPage() {
 
           {inDiscussionMemos.length > 0 && (
             <div>
-              <h3 className="mb-4 text-2xl font-semibold text-foreground flex items-center gap-2">
+              <h3 className="mb-4 flex items-center gap-2 text-2xl font-semibold text-foreground">
                 <Scroll size={24} weight="duotone" className="text-secondary" />
                 In Discussion
               </h3>
@@ -238,7 +238,7 @@ export default function PolicyPage() {
 
           {conceptMemos.length > 0 && (
             <div>
-              <h3 className="mb-4 text-2xl font-semibold text-foreground flex items-center gap-2">
+              <h3 className="mb-4 flex items-center gap-2 text-2xl font-semibold text-foreground">
                 <Clock size={24} weight="duotone" className="text-muted-foreground" />
                 Concept
               </h3>

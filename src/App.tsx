@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom"
-import { useEffect } from "react"
 import HomePage from "@/pages/HomePage"
 import LabsPage from "@/pages/LabsPage"
 import ConsultingPage from "@/pages/ConsultingPage"
@@ -7,13 +6,8 @@ import PolicyPage from "@/pages/PolicyPage"
 import ImpactLedgerPage from "@/pages/ImpactLedgerPage"
 import DataIntegrationPage from "@/pages/DataIntegrationPage"
 import { Toaster } from "@/components/ui/sonner"
-import { registerServiceWorker } from "@/lib/registerServiceWorker"
 
 function App() {
-  useEffect(() => {
-    registerServiceWorker()
-  }, [])
-
   return (
     <BrowserRouter>
       <Routes>
