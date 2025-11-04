@@ -13,6 +13,10 @@ export interface Project {
     label: string
     value: string
   }[]
+  clientName?: string
+  annual_savings_usd?: number
+  payback_months?: number
+  short_kpi_summary?: string
 }
 
 export const projects: Project[] = [
@@ -130,6 +134,69 @@ export const projects: Project[] = [
       { label: "Datasets", value: "247" },
       { label: "Research Teams", value: "83" },
       { label: "Annual Cost Savings", value: "$320K" }
+    ]
+  },
+  {
+    id: "9",
+    title: "AI Procurement Risk Assessment - City of Boston",
+    description: "Deployed automated bias detection and transparency scoring for AI vendors competing for city contracts. System evaluates vendor proposals against ethical AI standards, model explainability requirements, and equity impact criteria before procurement decisions.",
+    sector: "Government & AI Ethics",
+    techStack: ["Python", "scikit-learn", "React", "PostgreSQL", "FastAPI"],
+    origin: "consulting",
+    slug: "boston-ai-procurement",
+    status: "active",
+    clientName: "City of Boston",
+    client: "City of Boston",
+    annual_savings_usd: 280000,
+    payback_months: 8,
+    short_kpi_summary: "Prevented 3 high-risk AI contracts, saved $280K annually in avoided bias remediation costs, reduced procurement review time by 45%",
+    metrics: [
+      { label: "Vendors Evaluated", value: "23" },
+      { label: "High-Risk Flags", value: "3" },
+      { label: "Review Time Reduction", value: "45%" },
+      { label: "Annual Savings", value: "$280K" }
+    ]
+  },
+  {
+    id: "10",
+    title: "Clinical AI Monitoring Platform - Stanford Medicine",
+    description: "Real-time explainability and performance monitoring for 12 clinical decision support AI models across radiology, pathology, and emergency departments. Continuous drift detection, fairness metrics tracking, and automated compliance reporting for FDA and state regulators.",
+    sector: "Healthcare & AI Safety",
+    techStack: ["PyTorch", "TensorBoard", "React", "TimescaleDB", "Kubernetes"],
+    origin: "consulting",
+    slug: "stanford-clinical-ai-monitoring",
+    status: "active",
+    clientName: "Stanford Medicine",
+    client: "Stanford Medicine",
+    annual_savings_usd: 625000,
+    payback_months: 11,
+    short_kpi_summary: "Reduced compliance audit costs by 68%, caught 2 critical model drift events before patient impact, improved clinician trust scores by 34%",
+    metrics: [
+      { label: "Models Monitored", value: "12" },
+      { label: "Drift Events Caught", value: "2" },
+      { label: "Audit Cost Reduction", value: "68%" },
+      { label: "Clinician Trust Increase", value: "+34%" }
+    ]
+  },
+  {
+    id: "11",
+    title: "Supply Chain Transparency Network - Fair Trade Alliance",
+    description: "Blockchain-based traceability system using explainable AI to verify ethical sourcing claims across 140+ coffee and cocoa cooperatives in 8 countries. Enables consumers to verify fair wages, environmental practices, and supply chain transparency via QR codes.",
+    sector: "Ethical Supply Chain & Agriculture",
+    techStack: ["Ethereum", "IPFS", "React Native", "Python", "MongoDB"],
+    origin: "consulting",
+    slug: "fair-trade-supply-chain",
+    status: "pilot",
+    clientName: "Fair Trade Alliance",
+    client: "Fair Trade Alliance",
+    annual_savings_usd: 450000,
+    payback_months: 16,
+    short_kpi_summary: "Verified 140+ cooperatives, increased consumer trust by 52%, reduced fraud claims by 89%, generated $450K in operational efficiencies",
+    metrics: [
+      { label: "Cooperatives Verified", value: "140+" },
+      { label: "Countries", value: "8" },
+      { label: "Fraud Reduction", value: "89%" },
+      { label: "Consumer Trust Increase", value: "+52%" }
     ]
   }
 ]

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import MetricPill from "@/components/MetricPill"
 import { projects } from "@/data/projects"
-import { Briefcase, ArrowRight, CheckCircle, TrendUp, Sparkle, Rocket, Building } from "@phosphor-icons/react"
+import { Briefcase, ArrowRight, CheckCircle, TrendUp, Sparkle, Rocket, Building, EnvelopeSimple, CalendarCheck, ChartBar } from "@phosphor-icons/react"
 
 const serviceTiers = [
   {
@@ -53,7 +53,10 @@ const serviceTiers = [
 ]
 
 export default function ConsultingPage() {
-  const clientProjects = projects.filter(p => p.origin === "consulting")
+  const consultingProjects = projects.filter(p => p.origin === "consulting")
+  const recentWins = consultingProjects
+    .filter(p => p.short_kpi_summary && p.annual_savings_usd && p.payback_months)
+    .slice(-3)
 
   return (
     <LayoutShell>
@@ -73,6 +76,97 @@ export default function ConsultingPage() {
             generating evidence for policy advocacy.
           </p>
         </div>
+
+        <div className="mb-20">
+          <h2 className="mb-8 text-center text-3xl font-semibold text-foreground">
+            Service Tiers
+          </h2>
+          <p className="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">
+            Flexible engagement models designed to meet you where you are - from initial assessment to full-scale deployment.
+          </p>
+          <div className="grid gap-8 md:grid-cols-3">
+            {serviceTiers.map((tier) => {
+              const Icon = tier.icon
+              return (
+                <Card key={tier.id} className="flex flex-col border-2 transition-all hover:border-secondary hover:shadow-lg">
+                  <CardHeader>
+                    <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-secondary/10">
+                      <Icon size={28} weight="duotone" className="text-secondary" />
+                    </div>
+                    <CardTitle className="text-2xl">{tier.name}</CardTitle>
+                    <div className="flex items-center gap-2 pt-2">
+                      <Badge variant="secondary" className="text-base font-semibold">
+                        {tier.priceRange}
+                      </Badge>
+                      <Badge variant="outline">{tier.duration}</Badge>
+                    </div>
+                    <CardDescription className="pt-3 text-base">
+                      {tier.description}
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="flex-grow">
+                    <h4 className="mb-3 text-sm font-semibold text-foreground">Key Outcomes</h4>
+                    <ul className="space-y-2">
+                      {tier.outcomes.map((outcome, idx) => (
+                        <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
+                          <CheckCircle size={16} weight="fill" className="mt-0.5 shrink-0 text-secondary" />
+                          <span>{outcome}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              )
+            })}
+          </div>
+        </div>
+
+        {recentWins.length > 0 && (
+          <div className="mb-20">
+            <div className="mb-8 text-center">
+              <h2 className="mb-2 text-3xl font-semibold text-foreground">
+                Recent Wins
+              </h2>
+              <p className="text-muted-foreground">
+                Quantifiable impact from our latest consulting engagements
+              </p>
+            </div>
+            <div className="grid gap-8 md:grid-cols-3">
+              {recentWins.map((project) => (
+                <Card key={project.id} className="border-2 transition-all hover:border-secondary hover:shadow-lg">
+                  <CardHeader>
+                    <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-accent/10">
+                      <ChartBar size={24} weight="duotone" className="text-accent" />
+                    </div>
+                    <CardTitle className="text-xl">{project.clientName || project.client}</CardTitle>
+                    <Badge variant="outline" className="w-fit font-normal">
+                      {project.sector}
+                    </Badge>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <p className="text-sm text-muted-foreground">
+                      {project.short_kpi_summary}
+                    </p>
+                    <div className="space-y-2">
+                      <div className="flex items-center justify-between rounded-lg bg-muted/50 p-3">
+                        <span className="text-sm font-medium text-muted-foreground">Annual Savings</span>
+                        <span className="text-lg font-bold text-foreground">
+                          ${(project.annual_savings_usd! / 1000).toFixed(0)}K
+                        </span>
+                      </div>
+                      <div className="flex items-center justify-between rounded-lg bg-muted/50 p-3">
+                        <span className="text-sm font-medium text-muted-foreground">Payback Period</span>
+                        <span className="text-lg font-bold text-foreground">
+                          {project.payback_months} months
+                        </span>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              ))}
+            </div>
+          </div>
+        )}
 
         <div className="mb-20">
           <h2 className="mb-8 text-center text-3xl font-semibold text-foreground">
@@ -127,130 +221,120 @@ export default function ConsultingPage() {
         </div>
 
         <div className="mb-20">
-          <h2 className="mb-8 text-center text-3xl font-semibold text-foreground">
-            Service Tiers
-          </h2>
-          <p className="mx-auto mb-12 max-w-2xl text-center text-muted-foreground">
-            Flexible engagement models designed to meet you where you are - from initial assessment to full-scale deployment.
-          </p>
-          <div className="grid gap-8 md:grid-cols-3">
-            {serviceTiers.map((tier) => {
-              const Icon = tier.icon
-              return (
-                <Card key={tier.id} className="flex flex-col border-2 transition-all hover:border-secondary hover:shadow-lg">
-                  <CardHeader>
-                    <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-xl bg-secondary/10">
-                      <Icon size={28} weight="duotone" className="text-secondary" />
+          <div className="mb-8">
+            <h2 className="mb-2 text-3xl font-semibold text-foreground">
+              Client Case Studies
+            </h2>
+            <p className="text-muted-foreground">
+              Real-world deployments with measurable impact across healthcare, government, and education sectors.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            {consultingProjects.map((project) => (
+              <Card key={project.id} className="flex flex-col border-2 transition-all hover:border-secondary hover:shadow-lg">
+                <CardHeader>
+                  <div className="mb-3 flex items-start justify-between gap-3">
+                    <div className="flex-1">
+                      <CardTitle className="text-2xl">{project.title}</CardTitle>
+                      {project.client && (
+                        <p className="mt-1 text-sm font-medium text-secondary">{project.client}</p>
+                      )}
                     </div>
-                    <CardTitle className="text-2xl">{tier.name}</CardTitle>
-                    <div className="flex items-center gap-2 pt-2">
-                      <Badge variant="secondary" className="text-base font-semibold">
-                        {tier.priceRange}
-                      </Badge>
-                      <Badge variant="outline">{tier.duration}</Badge>
+                    <Badge 
+                      variant={project.status === "active" ? "default" : "secondary"}
+                      className="shrink-0"
+                    >
+                      {project.status}
+                    </Badge>
+                  </div>
+                  <CardDescription className="text-base">
+                    {project.description}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent className="flex-grow space-y-4">
+                  <div>
+                    <h4 className="mb-2 text-sm font-semibold text-foreground">Sector</h4>
+                    <Badge variant="outline" className="font-normal">
+                      {project.sector}
+                    </Badge>
+                  </div>
+                  {project.metrics && project.metrics.length > 0 && (
+                    <div>
+                      <h4 className="mb-2 text-sm font-semibold text-foreground">Impact Metrics</h4>
+                      <div className="flex flex-wrap gap-2">
+                        {project.metrics.map((metric, idx) => (
+                          <MetricPill
+                            key={idx}
+                            label={metric.label}
+                            value={metric.value}
+                            variant="secondary"
+                          />
+                        ))}
+                      </div>
                     </div>
-                    <CardDescription className="pt-3 text-base">
-                      {tier.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent className="flex-grow">
-                    <h4 className="mb-3 text-sm font-semibold text-foreground">Key Outcomes</h4>
-                    <ul className="space-y-2">
-                      {tier.outcomes.map((outcome, idx) => (
-                        <li key={idx} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <CheckCircle size={16} weight="fill" className="mt-0.5 shrink-0 text-secondary" />
-                          <span>{outcome}</span>
-                        </li>
+                  )}
+                  <div>
+                    <h4 className="mb-2 text-sm font-semibold text-foreground">Technology</h4>
+                    <div className="flex flex-wrap gap-2">
+                      {project.techStack.map((tech) => (
+                        <Badge key={tech} variant="outline" className="font-normal">
+                          {tech}
+                        </Badge>
                       ))}
-                    </ul>
-                  </CardContent>
-                </Card>
-              )
-            })}
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
 
-        <div className="mb-8">
-          <h2 className="mb-2 text-3xl font-semibold text-foreground">
-            Client Case Studies
-          </h2>
-          <p className="text-muted-foreground">
-            Real-world deployments with measurable impact across healthcare, government, and education sectors.
-          </p>
-        </div>
+        <div className="rounded-2xl border-2 border-primary/20 bg-primary/5 p-8 md:p-12">
+          <div className="mx-auto max-w-3xl text-center">
+            <Briefcase size={48} weight="duotone" className="mx-auto mb-6 text-primary" />
+            <h3 className="mb-4 text-3xl font-bold text-foreground">
+              Ready to Deploy Ethical AI?
+            </h3>
+            <p className="mb-8 text-lg text-muted-foreground">
+              We work with universities, healthcare systems, and government agencies to implement 
+              privacy-preserving AI, energy transparency tools, and compliance frameworks. Let's discuss 
+              how our proven solutions can address your specific challenges.
+            </p>
+            
+            <div className="mb-8 flex flex-col items-center gap-4 sm:flex-row sm:justify-center">
+              <Button size="lg" asChild>
+                <a 
+                  href="https://scheduler.zoom.us/altruistic-xai/altruisticxai-booking" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="gap-2"
+                >
+                  <CalendarCheck size={20} weight="duotone" />
+                  Book a Call
+                </a>
+              </Button>
+              <Button size="lg" variant="outline" asChild>
+                <a 
+                  href="mailto:consulting@altruisticxai.org"
+                  className="gap-2"
+                >
+                  <EnvelopeSimple size={20} weight="duotone" />
+                  Email Us
+                </a>
+              </Button>
+            </div>
 
-        <div className="grid gap-8 md:grid-cols-2">
-          {clientProjects.map((project) => (
-            <Card key={project.id} className="flex flex-col border-2 transition-all hover:border-secondary hover:shadow-lg">
-              <CardHeader>
-                <div className="mb-3 flex items-start justify-between gap-3">
-                  <div className="flex-1">
-                    <CardTitle className="text-2xl">{project.title}</CardTitle>
-                    {project.client && (
-                      <p className="mt-1 text-sm font-medium text-secondary">{project.client}</p>
-                    )}
-                  </div>
-                  <Badge 
-                    variant={project.status === "active" ? "default" : "secondary"}
-                    className="shrink-0"
-                  >
-                    {project.status}
-                  </Badge>
-                </div>
-                <CardDescription className="text-base">
-                  {project.description}
-                </CardDescription>
-              </CardHeader>
-              <CardContent className="flex-grow space-y-4">
-                <div>
-                  <h4 className="mb-2 text-sm font-semibold text-foreground">Sector</h4>
-                  <Badge variant="outline" className="font-normal">
-                    {project.sector}
-                  </Badge>
-                </div>
-                {project.metrics && project.metrics.length > 0 && (
-                  <div>
-                    <h4 className="mb-2 text-sm font-semibold text-foreground">Impact Metrics</h4>
-                    <div className="flex flex-wrap gap-2">
-                      {project.metrics.map((metric, idx) => (
-                        <MetricPill
-                          key={idx}
-                          label={metric.label}
-                          value={metric.value}
-                          variant="secondary"
-                        />
-                      ))}
-                    </div>
-                  </div>
-                )}
-                <div>
-                  <h4 className="mb-2 text-sm font-semibold text-foreground">Technology</h4>
-                  <div className="flex flex-wrap gap-2">
-                    {project.techStack.map((tech) => (
-                      <Badge key={tech} variant="outline" className="font-normal">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-
-        <div className="mt-16 rounded-2xl border-2 border-secondary/20 bg-secondary/5 p-8 text-center">
-          <Briefcase size={48} weight="duotone" className="mx-auto mb-4 text-secondary" />
-          <h3 className="mb-3 text-2xl font-semibold text-foreground">
-            Ready to deploy ethical AI in your organization?
-          </h3>
-          <p className="mx-auto mb-6 max-w-2xl text-muted-foreground">
-            We work with universities, healthcare systems, and government agencies to implement 
-            privacy-preserving AI, energy transparency tools, and compliance frameworks. Let's discuss 
-            how our proven solutions can address your specific challenges.
-          </p>
-          <Button size="lg" variant="default">
-            Schedule a Consultation
-          </Button>
+            <p className="text-sm text-muted-foreground">
+              <span className="font-medium">Contact:</span>{" "}
+              <a 
+                href="mailto:consulting@altruisticxai.org" 
+                className="text-primary underline-offset-4 hover:underline"
+              >
+                consulting@altruisticxai.org
+              </a>
+            </p>
+          </div>
         </div>
       </div>
     </LayoutShell>
