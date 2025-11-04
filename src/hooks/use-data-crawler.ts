@@ -1,16 +1,25 @@
 import { useState, useCallback } from "react"
 import { useKV } from "@github/spark/hooks"
+import type { Project, GrantOpportunity, OpenDataset } from "@/data/schema"
 
+export interface CrawlerData {
   projects: Project[]
-
-  lastIngestTimestamp?:
-  error?: string
-
-  const [crawlerData, set
-    grants: [],
+  grants: GrantOpportunity[]
+  datasets: OpenDataset[]
+  sources?: string[]
   lastIngestTimestamp?: string
   isLoading: boolean
   error?: string
+}
+
+async function runFullIngest() {
+  return {
+    projects: [] as Project[],
+    grants: [] as GrantOpportunity[],
+    datasets: [] as OpenDataset[],
+    sources: [] as string[],
+    timestamp: new Date().toISOString()
+  }
 }
 
 export function useDataCrawler() {
@@ -18,23 +27,22 @@ export function useDataCrawler() {
     projects: [],
     grants: [],
     datasets: [],
+    isLoading: false,
+  })
+  const [isIngesting, setIsIngesting] = useState(false)
+
+  const runIngest = useCallback(async () => {
+    setIsIngesting(true)
+    setCrawlerData((current = {
+      projects: [],
+      grants: [],
       datasets: [],
-    
-  
+      isLoading: false,
+    }) => ({
+      ...current,
+      isLoading: true,
+      error: undefined,
     }))
-
-      
-        projects: [],
-        datasets: [],
-      }) => ({
-        projects:
-        datasets: r
-        lastIngestTimes
-        erro
-
-      return result
-      const errorMessag
-      s
 
     try {
       const result = await runFullIngest()
@@ -100,11 +108,6 @@ export function useDataCrawler() {
     crawlerData,
     isIngesting,
     runIngest,
-    getHighAlignmentGrants,
-    getHighPriorityProjects,
-    getRelevantDatasets,
-  }
-}
     getHighAlignmentGrants,
     getHighPriorityProjects,
     getRelevantDatasets,
