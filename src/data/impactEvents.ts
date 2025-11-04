@@ -9,6 +9,9 @@ export interface ImpactEvent {
     label: string
     value: string
   }[]
+  provenance?: {
+    capturedAt?: string
+  }
 }
 
 export const impactEvents = [
