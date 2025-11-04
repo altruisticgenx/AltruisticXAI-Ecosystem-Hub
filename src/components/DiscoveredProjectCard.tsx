@@ -1,23 +1,32 @@
-import { Project } from "@/data/schema"
+import { DiscoveredProject } from "@/hooks/use-discovered-projects"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { MapPin, Buildings, TrendUp, Database, Star } from "@phosphor-icons/react"
+import { Button } from "@/components/ui/button"
+import { GitBranch, Star, GithubLogo, X, Lightbulb } from "@phosphor-icons/react"
 
 interface DiscoveredProjectCardProps {
-  project: Project
+  project: DiscoveredProject
+  onRemove?: (repoId: number) => void
 }
 
-export default function DiscoveredProjectCard({ project }: DiscoveredProjectCardProps) {
-  const isPriority = (project.priorityScore ?? 0) >= 80
+export default function DiscoveredProjectCard({ project, onRemove }: DiscoveredProjectCardProps) {
+  const { repo, analysis } = project
+  const isHighRelevance = analysis.relevanceScore >= 80
 
-  const getSourceBadgeColor = (source: string) => {
-    switch (source) {
-      case "usaspending":
+  const getOwnerFromFullName = (fullName: string) => {
+    return fullName.split('/')[0] || 'Unknown'
+  }
+
+  const getCategoryColor = (category: string) => {
+    switch (category) {
+      case "explainability":
         return "bg-blue-500/10 text-blue-700 border-blue-500/20"
-      case "nsf_awards":
+      case "privacy":
         return "bg-purple-500/10 text-purple-700 border-purple-500/20"
-      case "manual":
+      case "fairness":
         return "bg-green-500/10 text-green-700 border-green-500/20"
+      case "sustainability":
+        return "bg-teal-500/10 text-teal-700 border-teal-500/20"
       default:
         return "bg-gray-500/10 text-gray-700 border-gray-500/20"
     }
@@ -28,30 +37,44 @@ export default function DiscoveredProjectCard({ project }: DiscoveredProjectCard
       <CardHeader className="pb-3">
         <div className="mb-2 flex items-start justify-between gap-3">
           <CardTitle className="text-base font-bold leading-tight">
-            {project.title}
+            {repo.name}
           </CardTitle>
-          {isPriority && (
-            <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/15 ring-1 ring-primary/30">
-              <Star size={14} weight="fill" className="text-primary" />
-            </div>
-          )}
+          <div className="flex items-center gap-2">
+            {isHighRelevance && (
+              <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-primary/15 ring-1 ring-primary/30">
+                <Star size={14} weight="fill" className="text-primary" />
+              </div>
+            )}
+            {onRemove && (
+              <Button
+                variant="ghost"
+                size="icon"
+                className="h-7 w-7 opacity-0 group-hover:opacity-100"
+                onClick={() => onRemove(repo.id)}
+              >
+                <X size={14} />
+              </Button>
+            )}
+          </div>
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <Badge className={getSourceBadgeColor(project.provenance.source)}>
-            <Database size={12} weight="bold" className="mr-1" />
-            {project.provenance.source.replace(/_/g, " ")}
+          <Badge variant="secondary" className="text-xs">
+            <GithubLogo size={12} weight="bold" className="mr-1" />
+            {getOwnerFromFullName(repo.full_name)}
           </Badge>
-          
-          {project.origin && (
-            <Badge variant="outline" className="text-xs">
-              {project.origin}
-            </Badge>
-          )}
 
-          {project.priorityScore !== undefined && (
-            <Badge variant="secondary" className="text-xs">
-              Score: {project.priorityScore}
+          <Badge className={getCategoryColor(analysis.category)}>
+            {analysis.category.replace('-', ' ')}
+          </Badge>
+
+          <Badge variant="outline" className="text-xs">
+            Score: {analysis.relevanceScore}
+          </Badge>
+
+          {repo.language && (
+            <Badge variant="outline" className="text-xs">
+              {repo.language}
             </Badge>
           )}
         </div>
@@ -59,61 +82,66 @@ export default function DiscoveredProjectCard({ project }: DiscoveredProjectCard
 
       <CardContent className="space-y-4">
         <p className="line-clamp-3 text-sm text-muted-foreground">
-          {project.description}
+          {repo.description || "No description available"}
         </p>
 
         <div className="space-y-2 text-xs">
-          {project.location && (project.location.state || project.location.city) && (
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <MapPin size={14} weight="duotone" className="shrink-0" />
-              <span>
-                {[project.location.city, project.location.state]
-                  .filter(Boolean)
-                  .join(", ")}
-              </span>
+          <div className="flex items-center gap-4 text-muted-foreground">
+            <div className="flex items-center gap-1">
+              <Star size={14} weight="duotone" />
+              <span>{repo.stargazers_count.toLocaleString()}</span>
             </div>
-          )}
-
-          {(project.institutionName || project.clientName) && (
-            <div className="flex items-center gap-2 text-muted-foreground">
-              <Buildings size={14} weight="duotone" className="shrink-0" />
-              <span className="truncate">
-                {project.institutionName || project.clientName}
-              </span>
-            </div>
-          )}
-
-          {project.short_kpi_summary && (
-            <div className="flex items-start gap-2 text-muted-foreground">
-              <TrendUp size={14} weight="duotone" className="mt-0.5 shrink-0" />
-              <span className="line-clamp-2">{project.short_kpi_summary}</span>
-            </div>
-          )}
+            {repo.topics && repo.topics.length > 0 && (
+              <div className="flex items-center gap-1">
+                <Lightbulb size={14} weight="duotone" />
+                <span>{repo.topics.length} topics</span>
+              </div>
+            )}
+          </div>
         </div>
 
-        {project.tags && project.tags.length > 0 && (
+        <div className="space-y-2">
+          <div className="text-xs">
+            <div className="mb-1 font-medium text-foreground">Use Case:</div>
+            <p className="text-muted-foreground">{analysis.potentialUseCase}</p>
+          </div>
+          <div className="text-xs">
+            <div className="mb-1 font-medium text-foreground">Why Relevant:</div>
+            <p className="text-muted-foreground">{analysis.alignmentReason}</p>
+          </div>
+        </div>
+
+        {analysis.keyInsights && analysis.keyInsights.length > 0 && (
           <div className="flex flex-wrap gap-1.5">
-            {project.tags.slice(0, 5).map((tag) => (
+            {analysis.keyInsights.slice(0, 3).map((insight, idx) => (
               <span
-                key={tag}
+                key={idx}
                 className="rounded-md bg-muted px-2 py-0.5 text-xs text-muted-foreground"
               >
-                {tag}
+                {insight}
               </span>
             ))}
           </div>
         )}
 
-        {project.provenance.sourceUrl && (
+        <div className="flex items-center justify-between border-t border-border pt-3">
+          <div className="flex gap-2 text-xs text-muted-foreground">
+            <Badge variant="outline" className="text-xs">
+              {analysis.impactPotential} impact
+            </Badge>
+            <Badge variant="outline" className="text-xs">
+              {analysis.technicalComplexity}
+            </Badge>
+          </div>
           <a
-            href={project.provenance.sourceUrl}
+            href={repo.html_url}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-1 text-xs font-medium text-primary hover:underline"
           >
-            View Source →
+            GitHub →
           </a>
-        )}
+        </div>
       </CardContent>
     </Card>
   )

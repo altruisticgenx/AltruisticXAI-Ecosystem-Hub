@@ -11,7 +11,7 @@ import { useDataCrawler } from "@/hooks/use-data-crawler"
 import { toast } from "sonner"
 
 export default function ImpactLedgerPage() {
-  const { crawlerData, isIngesting, runIngest, getPriorityProjects } = useDataCrawler()
+  const { crawlerData, isIngesting, runIngest, getHighPriorityProjects } = useDataCrawler()
   
   const allEvents = impactEvents as ImpactEvent[]
   const pilotEvents = allEvents.filter(e => e.type === "pilot")
@@ -19,7 +19,7 @@ export default function ImpactLedgerPage() {
   const publicationEvents = allEvents.filter(e => e.type === "publication")
   const partnershipEvents = allEvents.filter(e => e.type === "partnership")
   
-  const priorityProjects = getPriorityProjects()
+  const priorityProjects = getHighPriorityProjects()
   
   const handleRunCrawler = async () => {
     try {
