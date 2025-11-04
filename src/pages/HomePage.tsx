@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 import { projects } from "@/data/projects"
-import { Flask, Briefcase, Scroll, Sparkle, ArrowRight, Buildings, GraduationCap, Users, Database } from "@phosphor-icons/react"
+import { Flask, Briefcase, Scroll, Sparkle, ArrowRight, Buildings, GraduationCap, Users, Database, CheckCircle } from "@phosphor-icons/react"
 import { Card } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { motion, useReducedMotion } from "framer-motion"
@@ -149,6 +149,15 @@ export default function HomePage() {
               <span className="font-semibold text-foreground">ROI-positive consulting pilots</span>, and translate what works into{" "}
               <span className="font-semibold text-foreground">durable funding and rules</span>. One flywheel—from GitHub, to campus, to statehouse.
             </p>
+            
+            <div className="mt-4 inline-flex items-center gap-2 rounded-full border border-accent/20 bg-accent/5 px-3 py-1.5 text-xs">
+              <CheckCircle size={16} weight="fill" className="text-accent" />
+              <span className="font-medium text-foreground">2025+ Federal Data Only</span>
+              <span className="text-muted-foreground">·</span>
+              <Link to="/data-integration" className="text-accent transition-colors hover:text-accent/80">
+                Learn more
+              </Link>
+            </div>
           </motion.div>
 
           <motion.div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap" variants={itemVariants}>

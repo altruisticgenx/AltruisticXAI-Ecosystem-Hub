@@ -4,12 +4,28 @@ A comprehensive platform showcasing the three-arm approach to ethical AI: Open S
 
 ## Features
 
+### 🎯 2025+ Data Guarantee
+
+**All federal data integrated into this platform is from 2025 onwards.** We use a three-layer validation system to ensure data freshness and accuracy:
+
+1. **API-Level Filtering**: All ingest scripts filter at the source (`time_period: start_date = "2025-01-01"`, `postedDateFrom = "2025-01-01"`)
+2. **Client-Side Validation**: Double-check every record's date field and skip pre-2025 data
+3. **Automated Verification**: Daily GitHub Action runs validation script and generates reports
+
+**UI Transparency**: The site clearly shows:
+- 📅 Last crawl timestamp
+- 📊 Data coverage range (e.g., "2025-01-01 → 2025-06-30")
+- ✅ Validation badge ("2025+ Validated")
+
+See [DATA_FRESHNESS_2025.md](./DATA_FRESHNESS_2025.md) and [DATA_VALIDATION_2025.md](./DATA_VALIDATION_2025.md) for complete details.
+
 ### Core Platform
 - **Multi-page Application**: Home, Labs, Consulting, Policy, and Impact Ledger
 - **Responsive Design**: Mobile-first approach with progressive enhancement
 - **Real-time Data**: Integration with GitHub API and Grants.gov API
 - **AI-Powered Analysis**: Automatic relevance scoring and categorization of discovered projects and grants
 - **Live Federal Grant Discovery**: Connected to official Grants.gov API v2 for real-time federal funding opportunities
+- **2025+ Data Only**: All federal sources filtered to 2025 or newer with transparent validation
 
 ### Open Source Labs
 - Showcase of internal open-source projects

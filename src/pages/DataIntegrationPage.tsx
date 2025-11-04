@@ -13,6 +13,7 @@ import { toast } from "sonner"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { motion } from "framer-motion"
 import GrantsAPITest from "@/components/GrantsAPITest"
+import { validateData } from "@/data-ingest/validate"
 
 export default function DataIntegrationPage() {
   const {
@@ -45,15 +46,49 @@ export default function DataIntegrationPage() {
 
   const [selectedGrantCategory, setSelectedGrantCategory] = useState<GrantCategory>('energy-ai')
   const [selectedProjectTopic, setSelectedProjectTopic] = useState<string>('local-first AI energy')
+  const [validationResult, setValidationResult] = useState<any>(null)
+  const [isValidating, setIsValidating] = useState(false)
   
   const handleRunCrawler = async () => {
     await runIngest()
+    
+    setIsValidating(true)
+    const result = await validateData()
+    setValidationResult(result)
+    setIsValidating(false)
+    
     if (crawlerData && crawlerData.projects.length > 0) {
       toast.success(`Crawled ${crawlerData.projects.length} projects!`, {
-        description: `From ${crawlerData.sources?.length || 0} data sources`
+        description: result.valid 
+          ? `From ${crawlerData.sources?.length || 0} sources - 2025+ validated ✓`
+          : `Validation found ${result.errors.length} issue(s)`
       })
     }
   }
+  
+  const getDataCoverage = () => {
+    if (!crawlerData?.projects || crawlerData.projects.length === 0) return null
+    
+    const dates: Date[] = []
+    crawlerData.projects.forEach((p) => {
+      if (p.effectiveDate) {
+        const d = new Date(p.effectiveDate)
+        if (!Number.isNaN(d.getTime())) dates.push(d)
+      }
+    })
+    
+    if (dates.length === 0) return null
+    
+    const min = new Date(Math.min(...dates.map((d) => d.getTime())))
+    const max = new Date(Math.max(...dates.map((d) => d.getTime())))
+    
+    return {
+      from: min.toISOString().slice(0, 10),
+      to: max.toISOString().slice(0, 10),
+    }
+  }
+  
+  const dataCoverage = getDataCoverage()
 
   const handleDiscoverGrants = async () => {
     const result = await discoverGrants(selectedGrantCategory, true)
@@ -119,13 +154,22 @@ export default function DataIntegrationPage() {
             </span>
           </p>
           
-          <div className="mx-auto mt-6 max-w-3xl">
+          <div className="mx-auto mt-6 max-w-3xl space-y-3">
             <Alert className="border-primary/30 bg-primary/5">
               <Lightning size={20} weight="duotone" className="text-primary" />
               <AlertDescription className="text-sm">
                 <span className="font-semibold text-foreground">Live Integration:</span>{" "}
                 Connected to <span className="font-mono text-primary">api.grants.gov/v2</span> for real-time federal grant opportunities. 
                 All data is pulled directly from Grants.gov's official API with AI-powered relevance scoring.
+              </AlertDescription>
+            </Alert>
+            
+            <Alert className="border-accent/30 bg-accent/5">
+              <CheckCircle size={20} weight="duotone" className="text-accent" />
+              <AlertDescription className="text-sm">
+                <span className="font-semibold text-foreground">2025+ Data Only:</span>{" "}
+                All federal data sources (USAspending, NSF Awards, Grants.gov) are filtered to include <span className="font-semibold">only records from 2025 onwards</span>. 
+                Multi-layer validation ensures data freshness and accuracy.
               </AlertDescription>
             </Alert>
           </div>
@@ -556,13 +600,13 @@ export default function DataIntegrationPage() {
                   Multi-Source Data Crawler
                 </CardTitle>
                 <CardDescription>
-                  Automated ingestion from NSF Awards, USAspending, EIA, NREL, College Scorecard, and Data.gov
+                  Automated ingestion from NSF Awards, USAspending, EIA, NREL, College Scorecard, and Data.gov — filtered to 2025+ data only
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <Button
                   onClick={handleRunCrawler}
-                  disabled={isIngesting}
+                  disabled={isIngesting || isValidating}
                   className="w-full"
                   size="lg"
                 >
@@ -570,6 +614,11 @@ export default function DataIntegrationPage() {
                     <>
                       <Sparkle size={20} className="mr-2 animate-spin" />
                       Crawling Data Sources...
+                    </>
+                  ) : isValidating ? (
+                    <>
+                      <Sparkle size={20} className="mr-2 animate-spin" />
+                      Validating Data Quality...
                     </>
                   ) : (
                     <>
@@ -584,25 +633,75 @@ export default function DataIntegrationPage() {
                     <AlertDescription>{crawlerData.error}</AlertDescription>
                   </Alert>
                 )}
+                
+                {validationResult && !validationResult.valid && (
+                  <Alert variant="destructive">
+                    <AlertDescription>
+                      <div>
+                        <p className="font-semibold">Validation Errors ({validationResult.errors.length}):</p>
+                        <ul className="ml-4 mt-1 list-disc text-xs">
+                          {validationResult.errors.slice(0, 3).map((err: string, idx: number) => (
+                            <li key={idx}>{err}</li>
+                          ))}
+                          {validationResult.errors.length > 3 && (
+                            <li>...and {validationResult.errors.length - 3} more</li>
+                          )}
+                        </ul>
+                      </div>
+                    </AlertDescription>
+                  </Alert>
+                )}
 
                 {crawlerData?.sources && crawlerData.sources.length > 0 && (
-                  <div className="rounded-lg border border-border bg-muted/30 p-4">
-                    <p className="mb-2 text-sm font-medium text-foreground">
-                      Data Sources ({crawlerData.sources.length}):
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {crawlerData.sources.map((source) => (
-                        <Badge key={source} variant="secondary">
-                          {source}
-                        </Badge>
-                      ))}
+                  <div className="space-y-3">
+                    <div className="rounded-lg border border-border bg-muted/30 p-4">
+                      <p className="mb-2 text-sm font-medium text-foreground">
+                        Data Sources ({crawlerData.sources.length}):
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        {crawlerData.sources.map((source) => (
+                          <Badge key={source} variant="secondary">
+                            {source}
+                          </Badge>
+                        ))}
+                      </div>
                     </div>
+                    
+                    {(crawlerData?.lastIngestTimestamp || dataCoverage || validationResult?.valid) && (
+                      <div className="rounded-lg border border-accent/20 bg-accent/5 p-4">
+                        <div className="flex items-start gap-2">
+                          <Calendar size={20} weight="duotone" className="mt-0.5 shrink-0 text-accent" />
+                          <div className="flex-1 space-y-1">
+                            {crawlerData?.lastIngestTimestamp && (
+                              <p className="text-xs text-muted-foreground">
+                                Last crawled: <span className="font-semibold text-foreground">
+                                  {new Date(crawlerData.lastIngestTimestamp).toLocaleString()}
+                                </span>
+                              </p>
+                            )}
+                            {dataCoverage && (
+                              <p className="text-xs text-muted-foreground">
+                                Data coverage: <span className="font-semibold text-foreground">
+                                  {dataCoverage.from} → {dataCoverage.to}
+                                </span>
+                              </p>
+                            )}
+                            {validationResult?.valid && (
+                              <div className="flex items-center gap-1.5 text-xs font-semibold text-accent">
+                                <CheckCircle size={14} weight="fill" />
+                                <span>2025+ Validated ({validationResult.stats?.projects || crawlerData.projects.length} projects)</span>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 )}
 
-                {crawlerData?.lastIngestTimestamp && (
+                {!crawlerData?.lastIngestTimestamp && !crawlerData?.sources && (
                   <p className="text-xs text-muted-foreground">
-                    Last run: {new Date(crawlerData.lastIngestTimestamp).toLocaleString()}
+                    No data crawled yet. Click "Run Full Crawler" to start ingesting from federal APIs.
                   </p>
                 )}
               </CardContent>
