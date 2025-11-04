@@ -2,7 +2,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { DiscoveredProject } from "@/hooks/use-discovered-projects"
-import { GitBranch, Star, X } from "@phosphor-icons/react"
+import { GitBranch, Star, X, Lightbulb, RocketLaunch, Code } from "@phosphor-icons/react"
 import { Progress } from "@/components/ui/progress"
 import { motion } from "framer-motion"
 
@@ -17,6 +17,18 @@ const categoryColors = {
   'fairness': 'bg-green-100 text-green-800 border-green-300',
   'sustainability': 'bg-emerald-100 text-emerald-800 border-emerald-300',
   'general-ethics': 'bg-gray-100 text-gray-800 border-gray-300'
+}
+
+const impactColors = {
+  'high': 'bg-green-50 text-green-700 border-green-200',
+  'medium': 'bg-yellow-50 text-yellow-700 border-yellow-200',
+  'low': 'bg-gray-50 text-gray-700 border-gray-200'
+}
+
+const complexityColors = {
+  'advanced': 'bg-red-50 text-red-700 border-red-200',
+  'intermediate': 'bg-orange-50 text-orange-700 border-orange-200',
+  'beginner': 'bg-green-50 text-green-700 border-green-200'
 }
 
 export default function DiscoveredProjectCard({ project, onRemove }: DiscoveredProjectCardProps) {
@@ -68,7 +80,7 @@ export default function DiscoveredProjectCard({ project, onRemove }: DiscoveredP
         <CardContent className="flex-grow space-y-3 sm:space-y-4">
           <div>
             <div className="mb-2 flex items-center justify-between">
-              <span className="text-xs font-medium text-foreground sm:text-sm">Relevance Score</span>
+              <span className="text-xs font-medium text-foreground sm:text-sm">AI Relevance Score</span>
               <span className={`text-sm font-bold sm:text-base ${relevanceColor}`}>
                 {analysis.relevanceScore}/100
               </span>
@@ -77,12 +89,28 @@ export default function DiscoveredProjectCard({ project, onRemove }: DiscoveredP
           </div>
 
           <div>
-            <h4 className="mb-2 text-xs font-semibold text-foreground sm:text-sm">Category & Sector</h4>
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-xs font-medium text-foreground sm:text-sm">Integration Readiness</span>
+              <span className="text-sm font-semibold sm:text-base text-muted-foreground">
+                {analysis.integrationReadiness}/100
+              </span>
+            </div>
+            <Progress value={analysis.integrationReadiness} className="h-2" />
+          </div>
+
+          <div>
+            <h4 className="mb-2 text-xs font-semibold text-foreground sm:text-sm">Classification</h4>
             <div className="flex flex-wrap gap-1.5 sm:gap-2">
-              <Badge className={categoryColors[analysis.category] + " text-xs"}>
+              <Badge className={categoryColors[analysis.category] + " text-xs font-medium"}>
                 {analysis.category}
               </Badge>
               <Badge variant="outline" className="text-xs">{analysis.recommendedSector}</Badge>
+              <Badge className={impactColors[analysis.impactPotential] + " text-xs border"}>
+                {analysis.impactPotential} impact
+              </Badge>
+              <Badge className={complexityColors[analysis.technicalComplexity] + " text-xs border"}>
+                {analysis.technicalComplexity}
+              </Badge>
             </div>
           </div>
 
@@ -96,6 +124,23 @@ export default function DiscoveredProjectCard({ project, onRemove }: DiscoveredP
             <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">{analysis.alignmentReason}</p>
           </div>
 
+          {analysis.keyInsights && analysis.keyInsights.length > 0 && (
+            <div>
+              <h4 className="mb-2 flex items-center gap-1.5 text-xs font-semibold text-foreground sm:text-sm">
+                <Lightbulb size={14} weight="duotone" className="text-primary" />
+                AI Insights
+              </h4>
+              <ul className="space-y-1">
+                {analysis.keyInsights.map((insight, idx) => (
+                  <li key={idx} className="flex items-start gap-1.5 text-xs leading-relaxed text-muted-foreground sm:text-sm">
+                    <span className="mt-1 text-primary">•</span>
+                    <span>{insight}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
           <div className="flex flex-wrap items-center gap-2 text-xs text-muted-foreground sm:gap-3 sm:text-sm">
             <div className="flex items-center gap-1">
               <Star size={14} weight="fill" className="text-yellow-500 sm:h-4 sm:w-4" />
@@ -103,6 +148,7 @@ export default function DiscoveredProjectCard({ project, onRemove }: DiscoveredP
             </div>
             {repo.language && (
               <Badge variant="secondary" className="text-xs font-normal">
+                <Code size={12} className="mr-1" />
                 {repo.language}
               </Badge>
             )}
@@ -133,7 +179,7 @@ export default function DiscoveredProjectCard({ project, onRemove }: DiscoveredP
               rel="noopener noreferrer"
               className="flex items-center justify-center gap-2"
             >
-              <GitBranch size={18} weight="bold" className="sm:h-5 sm:w-5" />
+              <RocketLaunch size={18} weight="bold" className="sm:h-5 sm:w-5" />
               <span className="text-sm sm:text-base">View on GitHub</span>
             </a>
           </Button>

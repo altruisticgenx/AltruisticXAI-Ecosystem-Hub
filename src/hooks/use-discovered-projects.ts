@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { useKV } from '@github/spark/hooks'
 import { searchEthicalAIProjects, GitHubRepo } from '@/lib/github-api'
-import { analyzeProjectRelevance, ProjectAnalysis } from '@/lib/ai-analyzer'
+import { analyzeBatchProjectRelevance, ProjectAnalysis } from '@/lib/ai-analyzer'
 
 export interface DiscoveredProject {
   repo: GitHubRepo
@@ -12,40 +12,57 @@ export interface DiscoveredProject {
 export function useDiscoveredProjects() {
   const [projects, setProjects] = useKV<DiscoveredProject[]>('discovered-projects', [])
   const [isLoading, setIsLoading] = useState(false)
+  const [loadingStage, setLoadingStage] = useState<string>('')
   const [error, setError] = useState<string | null>(null)
 
-  const discoverNewProjects = async (topic?: string, count: number = 5) => {
+  const discoverNewProjects = async (topic?: string, count: number = 10) => {
     setIsLoading(true)
     setError(null)
+    setLoadingStage('Searching GitHub...')
 
     try {
       const searchResult = await searchEthicalAIProjects(topic, count)
+      
+      const newRepos = searchResult.items.filter(repo => {
+        return !(projects || []).find(p => p.repo.id === repo.id)
+      })
+
+      if (newRepos.length === 0) {
+        setIsLoading(false)
+        setLoadingStage('')
+        return []
+      }
+
+      setLoadingStage(`Analyzing ${newRepos.length} projects with AI...`)
+      
+      const analysisResults = await analyzeBatchProjectRelevance(newRepos)
+      
       const newProjects: DiscoveredProject[] = []
-
-      for (const repo of searchResult.items) {
-        const existingProject = (projects || []).find(p => p.repo.id === repo.id)
-        if (existingProject) continue
-
-        const analysis = await analyzeProjectRelevance(repo)
-        
-        if (analysis.relevanceScore >= 60) {
+      
+      newRepos.forEach(repo => {
+        const analysis = analysisResults.get(repo.id)
+        if (analysis && analysis.relevanceScore >= 60) {
           newProjects.push({
             repo,
             analysis,
             discoveredAt: new Date().toISOString()
           })
         }
-      }
+      })
+
+      newProjects.sort((a, b) => b.analysis.relevanceScore - a.analysis.relevanceScore)
 
       if (newProjects.length > 0) {
         setProjects(current => [...newProjects, ...(current || [])].slice(0, 50))
       }
 
       setIsLoading(false)
+      setLoadingStage('')
       return newProjects
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Failed to discover projects')
       setIsLoading(false)
+      setLoadingStage('')
       return []
     }
   }
@@ -61,6 +78,7 @@ export function useDiscoveredProjects() {
   return {
     projects,
     isLoading,
+    loadingStage,
     error,
     discoverNewProjects,
     removeProject,

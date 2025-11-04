@@ -37,10 +37,10 @@ export async function searchEthicalAIProjects(
   perPage: number = 10
 ): Promise<GitHubSearchResult> {
   const searchTopic = topic || ETHICAL_AI_TOPICS[Math.floor(Math.random() * ETHICAL_AI_TOPICS.length)]
-  const query = `topic:${searchTopic} stars:>50 archived:false`
+  const query = `topic:${searchTopic} stars:>100 archived:false pushed:>2023-01-01`
   
   const response = await fetch(
-    `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&per_page=${perPage}`,
+    `https://api.github.com/search/repositories?q=${encodeURIComponent(query)}&sort=stars&order=desc&per_page=${Math.min(perPage, 30)}`,
     {
       headers: {
         'Accept': 'application/vnd.github.v3+json',
@@ -49,6 +49,9 @@ export async function searchEthicalAIProjects(
   )
 
   if (!response.ok) {
+    if (response.status === 403) {
+      throw new Error('GitHub API rate limit reached. Please try again in a few minutes.')
+    }
     throw new Error(`GitHub API error: ${response.status}`)
   }
 

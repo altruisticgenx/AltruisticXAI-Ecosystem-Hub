@@ -6,6 +6,7 @@ import { ArrowRight, GitBranch, Lightbulb, Code, Rocket, GitMerge, Flask, Sparkl
 import { projects } from "@/data/projects"
 import { useDiscoveredProjects } from "@/hooks/use-discovered-projects"
 import DiscoveredProjectCard from "@/components/DiscoveredProjectCard"
+import DiscoveryLoadingSkeleton from "@/components/DiscoveryLoadingSkeleton"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Alert, AlertDescription } from "@/components/ui/alert"
@@ -14,7 +15,7 @@ import { toast } from "sonner"
 
 export default function LabsPage() {
   const labsProjects = projects.filter(p => p.origin === "labs")
-  const { projects: discoveredProjects, isLoading, error, discoverNewProjects, removeProject, clearAll } = useDiscoveredProjects()
+  const { projects: discoveredProjects, isLoading, loadingStage, error, discoverNewProjects, removeProject, clearAll } = useDiscoveredProjects()
   const [selectedTopic, setSelectedTopic] = useState<string>('explainable-ai')
 
   const topics = [
@@ -31,7 +32,7 @@ export default function LabsPage() {
   ]
 
   const handleDiscover = async () => {
-    const newProjects = await discoverNewProjects(selectedTopic, 5)
+    const newProjects = await discoverNewProjects(selectedTopic, 10)
     if (newProjects && newProjects.length > 0) {
       toast.success(`Discovered ${newProjects.length} relevant project${newProjects.length !== 1 ? 's' : ''}!`, {
         description: `AI analyzed and found high-quality matches for ${topics.find(t => t.value === selectedTopic)?.label}`
@@ -223,10 +224,10 @@ export default function LabsPage() {
           <TabsContent value="discover">
             <div className="mb-6 sm:mb-8">
               <h2 className="mb-2 text-2xl font-semibold text-foreground sm:text-3xl">
-                Discover Aligned Open-Source Projects
+                AI-Powered Project Discovery
               </h2>
               <p className="text-sm text-muted-foreground">
-                Use AI to discover and analyze open-source projects that align with our ethical AI mission.
+                Advanced GPT-4 analysis of open-source projects for ethical AI alignment, impact potential, and integration readiness.
               </p>
             </div>
 
@@ -234,10 +235,10 @@ export default function LabsPage() {
               <CardHeader className="pb-3 sm:pb-4">
                 <CardTitle className="flex items-center gap-2 text-xl">
                   <MagnifyingGlass size={20} weight="duotone" className="text-primary" />
-                  Search for Projects
+                  Intelligent Project Search
                 </CardTitle>
                 <CardDescription className="text-sm">
-                  Select a topic and let AI analyze GitHub repositories for relevance to ethical AI principles.
+                  Select a topic and let GPT-4 deeply analyze GitHub repositories for relevance, impact potential, and ethical alignment.
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-3 sm:space-y-4">
@@ -264,7 +265,7 @@ export default function LabsPage() {
                     {isLoading ? (
                       <>
                         <div className="h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent" />
-                        <span className="text-sm">Analyzing...</span>
+                        <span className="text-sm">{loadingStage || 'Analyzing...'}</span>
                       </>
                     ) : (
                       <>
@@ -294,7 +295,9 @@ export default function LabsPage() {
               </CardContent>
             </Card>
 
-            {(discoveredProjects || []).length > 0 ? (
+            {isLoading ? (
+              <DiscoveryLoadingSkeleton count={3} stage={loadingStage} />
+            ) : (discoveredProjects || []).length > 0 ? (
               <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:gap-8">
                 {(discoveredProjects || []).map((project) => (
                   <DiscoveredProjectCard
@@ -312,7 +315,7 @@ export default function LabsPage() {
                     No Projects Discovered Yet
                   </h3>
                   <p className="max-w-md text-sm leading-relaxed text-muted-foreground">
-                    Select a topic and click "Discover Projects" to find open-source repositories that align with our ethical AI mission. AI will analyze each project for relevance.
+                    Select a topic and click "Discover Projects" to find open-source repositories that align with our ethical AI mission. Advanced GPT-4 will analyze each project for relevance, impact, and integration potential.
                   </p>
                 </CardContent>
               </Card>
