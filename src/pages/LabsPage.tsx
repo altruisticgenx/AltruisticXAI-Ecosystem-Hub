@@ -65,9 +65,9 @@ export default function LabsPage() {
             How We Work
           </h2>
           <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-4">
-            <Card className="border-2 transition-all hover:border-primary">
+            <Card className="group overflow-hidden border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1">
               <CardHeader className="pb-3">
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 sm:mb-3 sm:h-12 sm:w-12">
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 shadow-inner ring-1 ring-primary/10 transition-all group-hover:scale-105 sm:mb-3 sm:h-12 sm:w-12">
                   <Lightbulb className="text-primary" size={20} weight="duotone" />
                 </div>
                 <CardTitle className="text-base sm:text-lg">Ideation</CardTitle>
@@ -79,9 +79,9 @@ export default function LabsPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 transition-all hover:border-primary">
+            <Card className="group overflow-hidden border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1">
               <CardHeader className="pb-3">
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 sm:mb-3 sm:h-12 sm:w-12">
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 shadow-inner ring-1 ring-primary/10 transition-all group-hover:scale-105 sm:mb-3 sm:h-12 sm:w-12">
                   <Code className="text-primary" size={20} weight="duotone" />
                 </div>
                 <CardTitle className="text-base sm:text-lg">Prototype</CardTitle>
@@ -93,9 +93,9 @@ export default function LabsPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 transition-all hover:border-primary">
+            <Card className="group overflow-hidden border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1">
               <CardHeader className="pb-3">
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 sm:mb-3 sm:h-12 sm:w-12">
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 shadow-inner ring-1 ring-primary/10 transition-all group-hover:scale-105 sm:mb-3 sm:h-12 sm:w-12">
                   <GitBranch className="text-primary" size={20} weight="duotone" />
                 </div>
                 <CardTitle className="text-base sm:text-lg">Public Repo</CardTitle>
@@ -107,9 +107,9 @@ export default function LabsPage() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 transition-all hover:border-primary">
+            <Card className="group overflow-hidden border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1">
               <CardHeader className="pb-3">
-                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 sm:mb-3 sm:h-12 sm:w-12">
+                <div className="mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 shadow-inner ring-1 ring-primary/10 transition-all group-hover:scale-105 sm:mb-3 sm:h-12 sm:w-12">
                   <GitMerge className="text-primary" size={20} weight="duotone" />
                 </div>
                 <CardTitle className="text-base sm:text-lg">Pilot Integration</CardTitle>
@@ -144,10 +144,15 @@ export default function LabsPage() {
 
             <div className="grid gap-4 sm:gap-6 md:grid-cols-2 lg:gap-8">
               {labsProjects.map((project) => (
-                <Card key={project.id} className="flex flex-col border-2 shadow-sm transition-all duration-300 hover:border-primary hover:shadow-xl">
+                <Card key={project.id} className="group flex flex-col overflow-hidden border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1">
                   <CardHeader className="pb-3">
                     <div className="mb-2 flex items-start justify-between gap-2 sm:mb-3 sm:gap-3">
-                      <CardTitle className="text-xl sm:text-2xl">{project.title}</CardTitle>
+                      <div className="flex items-start gap-2.5">
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 shadow-inner ring-1 ring-primary/10 transition-all group-hover:scale-105">
+                          <Flask size={18} weight="duotone" className="text-primary" />
+                        </div>
+                        <CardTitle className="text-xl sm:text-2xl">{project.title}</CardTitle>
+                      </div>
                       <Badge 
                         variant={project.status === "active" ? "default" : project.status === "pilot" ? "secondary" : "outline"}
                         className="shrink-0 text-xs"

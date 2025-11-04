@@ -62,13 +62,15 @@ export default function ImpactLedgerPage() {
           {stats.map((stat) => {
             const Icon = stat.icon
             return (
-              <Card key={stat.label} className="border-2">
+              <Card key={stat.label} className="group overflow-hidden border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1">
                 <CardHeader className="pb-3">
                   <div className="flex items-center justify-between">
                     <CardTitle className="text-sm font-medium text-muted-foreground">
                       {stat.label}
                     </CardTitle>
-                    <Icon size={20} weight="duotone" className={stat.color} />
+                    <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-primary/15 to-primary/5 shadow-inner ring-1 ring-primary/10 transition-all group-hover:scale-105">
+                      <Icon size={18} weight="duotone" className={stat.color} />
+                    </div>
                   </div>
                 </CardHeader>
                 <CardContent>

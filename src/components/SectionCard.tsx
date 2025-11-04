@@ -19,10 +19,10 @@ export default function SectionCard({ icon, title, description, href, linkText =
       whileHover={{ y: -4, transition: { duration: 0.2 } }}
       className="h-full"
     >
-      <Card className="flex h-full flex-col border-2 shadow-sm transition-all duration-300 hover:border-primary hover:shadow-xl">
+      <Card className="flex h-full flex-col overflow-hidden border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)]">
         <CardHeader className="pb-3 sm:pb-4">
           <motion.div 
-            className="mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 sm:h-14 sm:w-14"
+            className="mb-3 flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 shadow-inner ring-1 ring-primary/10 sm:h-14 sm:w-14"
             whileHover={{ scale: 1.1, rotate: 5 }}
             transition={{ duration: 0.2 }}
           >

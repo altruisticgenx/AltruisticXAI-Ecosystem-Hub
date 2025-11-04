@@ -257,20 +257,21 @@ export default function HomePage() {
               return (
                 <motion.div key={pillar.id} variants={itemVariants}>
                   <Link to={pillar.href}>
-                    <Card className="group flex h-full flex-col justify-between border border-border bg-card p-4 shadow-sm transition-all hover:border-primary/50 hover:shadow-md active:scale-[0.98] sm:p-5">
-                      <div className="space-y-2.5 sm:space-y-3">
+                    <Card className="group relative flex h-full flex-col justify-between overflow-hidden border border-border/50 bg-card p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1 active:scale-[0.98] sm:p-4">
+                      <div className="space-y-2 sm:space-y-2.5">
                         <div className="flex items-center gap-2">
+                          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/10 to-primary/5 shadow-inner ring-1 ring-primary/10 transition-all group-hover:scale-105 group-hover:shadow-md group-hover:ring-primary/20">
+                            <Icon size={20} weight="duotone" className="text-primary" />
+                          </div>
                           <Badge variant="secondary" className="rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-medium text-primary">
                             {pillar.tag}
                           </Badge>
-                          <div className="h-px flex-1 bg-border" />
-                          <Icon size={18} weight="duotone" className="shrink-0 text-primary transition-transform group-hover:scale-110" />
                         </div>
                         <h3 className="text-sm font-semibold text-foreground sm:text-base">{pillar.name}</h3>
-                        <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">{pillar.description}</p>
+                        <p className="text-xs leading-relaxed text-muted-foreground">{pillar.description}</p>
                       </div>
-                      <div className="mt-4 space-y-2 sm:mt-5">
-                        <p className="text-xs font-medium text-primary sm:text-sm">{pillar.promise}</p>
+                      <div className="mt-3 space-y-2 sm:mt-4">
+                        <p className="text-xs font-medium text-primary">{pillar.promise}</p>
                         <span className="inline-flex items-center gap-1 text-[11px] font-medium text-primary transition-all group-hover:gap-1.5 group-hover:text-secondary">
                           Explore {pillar.name}
                           <ArrowRight size={12} weight="bold" />
@@ -325,12 +326,14 @@ export default function HomePage() {
               const Icon = aud.icon
               return (
                 <motion.div key={aud.name} variants={itemVariants}>
-                  <Card className="h-full border border-border bg-card p-4 shadow-sm transition-all hover:shadow-md sm:p-5">
-                    <div className="mb-2.5 flex items-center gap-2 sm:mb-3">
-                      <Icon size={20} weight="duotone" className="shrink-0 text-primary" />
-                      <h3 className="text-sm font-semibold text-foreground sm:text-base">{aud.name}</h3>
+                  <Card className="group h-full overflow-hidden border border-border/50 bg-card p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1">
+                    <div className="mb-3 flex items-center gap-2.5">
+                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-secondary/20 to-secondary/10 shadow-inner ring-1 ring-secondary/15 transition-all group-hover:scale-105 group-hover:shadow-md group-hover:ring-secondary/25">
+                        <Icon size={20} weight="duotone" className="text-secondary" />
+                      </div>
+                      <h3 className="text-sm font-semibold text-foreground">{aud.name}</h3>
                     </div>
-                    <p className="text-xs leading-relaxed text-muted-foreground sm:text-sm">{aud.detail}</p>
+                    <p className="text-xs leading-relaxed text-muted-foreground">{aud.detail}</p>
                   </Card>
                 </motion.div>
               )
@@ -370,19 +373,24 @@ export default function HomePage() {
                 key={p.id}
                 variants={itemVariants}
               >
-                <Card className="flex h-full flex-col border border-border bg-card p-4 shadow-sm transition-all hover:shadow-md sm:p-5">
-                  <div className="mb-2.5 flex items-center justify-between gap-2 sm:mb-3">
-                    <Badge variant="secondary" className="rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-medium text-foreground">
-                      {p.origin === "labs" ? "Labs" : "Consulting"}
-                    </Badge>
+                <Card className="group flex h-full flex-col overflow-hidden border border-border/50 bg-card p-4 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)] hover:-translate-y-1">
+                  <div className="mb-2.5 flex items-center justify-between gap-2">
+                    <div className="flex items-center gap-2">
+                      <div className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-accent/15 to-accent/5 shadow-inner ring-1 ring-accent/10 transition-all group-hover:scale-105">
+                        <Sparkle size={14} weight="duotone" className="text-accent" />
+                      </div>
+                      <Badge variant="secondary" className="rounded-full bg-muted px-2.5 py-0.5 text-[10px] font-medium text-foreground">
+                        {p.origin === "labs" ? "Labs" : "Consulting"}
+                      </Badge>
+                    </div>
                     {p.sector && (
                       <span className="line-clamp-1 text-[10px] text-muted-foreground">{p.sector}</span>
                     )}
                   </div>
-                  <h3 className="mb-1.5 text-sm font-semibold text-foreground sm:mb-2 sm:text-base">{p.title}</h3>
-                  <p className="mb-3 line-clamp-3 flex-1 text-xs leading-relaxed text-muted-foreground sm:text-sm">{p.description}</p>
+                  <h3 className="mb-1.5 text-sm font-semibold text-foreground">{p.title}</h3>
+                  <p className="mb-3 line-clamp-3 flex-1 text-xs leading-relaxed text-muted-foreground">{p.description}</p>
                   {p.short_kpi_summary && (
-                    <p className="mt-auto text-[11px] font-medium text-primary sm:text-xs">{p.short_kpi_summary}</p>
+                    <p className="mt-auto text-[11px] font-medium text-primary">{p.short_kpi_summary}</p>
                   )}
                 </Card>
               </motion.article>

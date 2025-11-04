@@ -23,6 +23,9 @@ const defaultTheme = {
       fine: { raw: "(pointer: fine)" },
       pwa: { raw: "(display-mode: standalone)" },
     },
+    boxShadow: {
+      soft: `var(--shadow-offset-x) var(--shadow-offset-y) var(--shadow-blur) var(--shadow-spread) color-mix(in oklch, var(--shadow-color) calc(var(--shadow-opacity) * 100%), transparent)`,
+    },
     colors: {
       neutral: {
         1: "var(--color-neutral-1)",

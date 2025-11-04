@@ -31,19 +31,24 @@ export default function DiscoveredProjectCard({ project, onRemove }: DiscoveredP
       transition={{ duration: 0.3 }}
       whileHover={{ y: -4 }}
     >
-      <Card className="flex h-full flex-col border-2 shadow-sm transition-all duration-300 hover:border-primary hover:shadow-xl">
+      <Card className="flex h-full flex-col overflow-hidden border border-border/50 shadow-[0_2px_8px_rgba(0,0,0,0.04),0_1px_2px_rgba(0,0,0,0.06)] transition-all duration-300 hover:border-primary/30 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08),0_4px_8px_rgba(0,0,0,0.04)]">
         <CardHeader className="pb-3 sm:pb-4">
           <div className="mb-2 flex items-start justify-between gap-2 sm:mb-3 sm:gap-3">
-            <div className="min-w-0 flex-1">
-              <CardTitle className="truncate text-lg sm:text-xl">{repo.name}</CardTitle>
-              <a 
-                href={repo.html_url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block truncate text-xs text-primary hover:underline sm:text-sm"
-              >
-                {repo.full_name}
-              </a>
+            <div className="flex min-w-0 flex-1 items-start gap-2.5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary/15 to-primary/5 shadow-inner ring-1 ring-primary/10">
+                <GitBranch size={18} weight="duotone" className="text-primary" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <CardTitle className="truncate text-lg sm:text-xl">{repo.name}</CardTitle>
+                <a 
+                  href={repo.html_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block truncate text-xs text-primary hover:underline sm:text-sm"
+                >
+                  {repo.full_name}
+                </a>
+              </div>
             </div>
             {onRemove && (
               <Button
