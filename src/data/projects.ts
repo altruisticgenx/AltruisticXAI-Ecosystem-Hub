@@ -1,26 +1,30 @@
 export interface Project {
   id: string
-  sector: strin
-  origin: "labs" | "c
-  status?: strin
-  clientName?: string
-  metrics?: Array<{ label: string; value: st
-  annual_savin
+  title: string
+  description: string
+  sector: string
+  techStack: string[]
+  origin: "labs" | "consulting"
+  slug: string
   status?: string
   client?: string
+  clientName?: string
   tags?: string[]
   metrics?: Array<{ label: string; value: string }>
+  annual_savings_usd?: number
+  short_kpi_summary?: string
+  payback_months?: number
 }
 
 export const projects: Project[] = [
   {
-    techStac
+    id: "1",
     title: "Campus Energy Dashboard",
     description: "An open-source energy monitoring and optimization platform designed for university campuses. Provides real-time insights into building energy consumption patterns and actionable recommendations for reducing carbon footprint.",
     sector: "Education & Sustainability",
     techStack: ["React", "D3.js", "Python", "PostgreSQL", "MQTT"],
     origin: "labs",
-    ]
+    slug: "campus-energy-dashboard",
     status: "pilot",
     tags: ["open source", "sustainability", "IoT", "data visualization"],
     metrics: [
@@ -28,41 +32,56 @@ export const projects: Project[] = [
       { label: "Buildings", value: "20" },
       { label: "Avg. Energy Reduction", value: "15%" }
     ]
-    
+  },
   {
-    slug: "f
-    tags: ["open source", "privacy", "fede
-  {
-    title: "Healthcare AI Compliance 
-    sector: "Healthcare & AI Ethics",
-    origin: "consul
+    id: "2",
+    title: "Federated Learning Toolkit",
+    description: "An open-source toolkit for privacy-preserving machine learning across distributed datasets.",
+    sector: "Healthcare & Privacy",
+    techStack: ["PyTorch", "Python", "Docker", "FastAPI"],
+    origin: "labs",
+    slug: "federated-learning-toolkit",
     status: "active",
-    clientName: "NYU 
-    short_kpi_summary: "Monitoring 8 AI models with 65% cost reduction and 120 hr
-    
+    tags: ["open source", "privacy", "federated learning", "machine learning"],
+    metrics: [
+      { label: "Downloads", value: "5K+" },
+      { label: "Contributors", value: "12" },
+      { label: "Organizations Using", value: "8" }
+    ]
+  },
   {
-      { labe
+    id: "3",
+    title: "Healthcare AI Compliance Suite",
+    description: "Local-first AI audit toolkit for healthcare organizations to monitor AI model compliance.",
+    sector: "Healthcare & AI Ethics",
+    techStack: ["Electron", "TensorFlow.js", "PostgreSQL", "React"],
+    origin: "labs",
+    slug: "healthcare-ai-compliance",
+    status: "active",
+    tags: ["open source", "healthcare", "AI ethics", "compliance"],
+    metrics: [
+      { label: "Models Supported", value: "15+" },
+      { label: "Compliance Checks", value: "50+" },
+      { label: "Organizations", value: "6" }
+    ]
   },
-    id: "6",
-    description: "Adapted our Campu
-    techStack: ["React", "D3.js", "Python", "PostgreSQL", "AWS"],
-    slug: "gsa-ener
-    client: "U.S. General Services Admi
-    tags: ["consultin
-    annual_savings_usd: 450000,
-    
-   
-      { labe
+  {
+    id: "4",
+    title: "Local-First AI Audit Toolkit",
+    description: "Privacy-focused toolkit for auditing AI models without sending data to external services.",
+    sector: "AI Ethics & Privacy",
+    techStack: ["Electron", "TensorFlow.js", "Python", "React"],
+    origin: "labs",
+    slug: "local-first-ai-audit",
+    status: "active",
+    tags: ["open source", "privacy", "AI ethics", "audit"],
+    metrics: [
+      { label: "Audit Types", value: "12" },
+      { label: "Models Analyzed", value: "200+" },
+      { label: "Users", value: "1K+" }
+    ]
   },
-    id: "7",
-    description: "Deployed production fed
-    techStack: ["PyTorch", "Kubernetes", "PostgreSQL", "FastAPI", "A
-    slug: "northeas
-    client: "Northeast Healthcare Conso
-    tags: ["consultin
-    annual_savings_usd: 620000,
-    
-   
+  {
     id: "5",
     title: "Healthcare AI Compliance Suite - NYU Langone",
     description: "Custom implementation of our Local-First AI Audit Toolkit for NYU Langone Health's diagnostic AI systems. Enabled continuous compliance monitoring across 8 AI models while maintaining HIPAA requirements and reducing audit costs by 65%.",
@@ -72,7 +91,11 @@ export const projects: Project[] = [
     slug: "nyu-healthcare-ai",
     status: "active",
     client: "NYU Langone Health",
+    clientName: "NYU Langone Health",
     tags: ["consulting", "healthcare", "AI ethics", "compliance", "HIPAA"],
+    short_kpi_summary: "Monitoring 8 AI models with 65% cost reduction and 120 hrs/mo audit time saved",
+    annual_savings_usd: 380000,
+    payback_months: 11,
     metrics: [
       { label: "AI Models Monitored", value: "8" },
       { label: "Cost Reduction", value: "65%" },
@@ -89,7 +112,11 @@ export const projects: Project[] = [
     slug: "gsa-energy-optimization",
     status: "active",
     client: "U.S. General Services Administration",
+    clientName: "U.S. General Services Administration",
     tags: ["consulting", "government", "sustainability", "energy"],
+    short_kpi_summary: "12 federal buildings with 18% energy reduction and $450K annual savings",
+    annual_savings_usd: 450000,
+    payback_months: 14,
     metrics: [
       { label: "Buildings", value: "12" },
       { label: "Energy Reduction", value: "18%" },
@@ -107,28 +134,16 @@ export const projects: Project[] = [
     slug: "northeast-federated-ml",
     status: "active",
     client: "Northeast Healthcare Consortium",
+    clientName: "Northeast Healthcare Consortium",
     tags: ["consulting", "healthcare", "federated learning", "privacy", "HIPAA"],
+    short_kpi_summary: "7 hospitals collaborating on 3 ML models benefiting 50K+ patients with 100% privacy compliance",
+    annual_savings_usd: 620000,
+    payback_months: 18,
     metrics: [
       { label: "Hospitals", value: "7" },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      { label: "Models Deployed", value: "3" },
+      { label: "Patients Benefited", value: "50K+" },
+      { label: "Privacy Compliance", value: "100%" }
+    ]
+  }
+]
