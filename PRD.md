@@ -1,141 +1,151 @@
-# AltruisticXAI - Three-Arm Ecosystem Platform
+# Product Requirements Document: AltruisticXAI Platform
 
-A comprehensive web application showcasing the self-reinforcing flywheel between Open Source Labs, Consulting Studio, and Policy Alliance - three arms working together to advance ethical AI in the public interest.
+A comprehensive digital platform that demonstrates the self-reinforcing flywheel of ethical AI through open-source innovation, strategic consulting, and evidence-based policy advocacy, enhanced with real-time AI-powered project discovery.
 
 **Experience Qualities**:
-1. **Transparent** - Every claim is backed by measurable evidence from the Impact Ledger, making the flywheel effect tangible and verifiable
-2. **Professional** - Clean, institutional design that builds trust with university administrators, healthcare executives, and government decision-makers
-3. **Purposeful** - Every element reinforces the three-arm model and demonstrates how innovation, implementation, and influence create sustainable change
+1. **Trustworthy**: Clear transparency in methods, metrics, and outcomes builds credibility with technical and policy audiences
+2. **Empowering**: Real-time AI discovery tools enable users to actively participate in finding aligned ethical AI projects
+3. **Professional**: Clean, modern design reflects the serious mission while remaining accessible to diverse stakeholders
 
 **Complexity Level**: Light Application (multiple features with basic state)
-- This is a multi-page informational application with client-side routing, structured data display, and clear navigation between distinct content sections. It presents complex organizational concepts through straightforward UI patterns without requiring user accounts or persistent state.
+The platform combines static content showcase with dynamic features including real-time API integration, AI-powered analysis, and persistent user data. It balances informational content with interactive discovery tools without requiring user authentication or complex workflows.
 
 ## Essential Features
 
-### Multi-Page Navigation System
-- **Functionality**: Client-side routing between five distinct pages (Home, Labs, Consulting, Policy, Impact Ledger)
-- **Purpose**: Allows users to explore each arm independently while maintaining context of the unified ecosystem
-- **Trigger**: User clicks navigation links in persistent header or section cards
-- **Progression**: Click navigation item → Route change → Page transition → Content loads → Scroll to top
-- **Success criteria**: All routes load instantly, active page is visually indicated, navigation is accessible on all pages
+### Feature 1: AI-Powered Project Discovery
+- **Functionality**: Searches GitHub for ethical AI projects and uses AI to analyze relevance
+- **Purpose**: Helps users discover aligned open-source projects and demonstrates our technical capabilities
+- **Trigger**: User selects topic and clicks "Discover Projects" button
+- **Progression**: Select topic → Click discover → API fetches repos → AI analyzes each → Filter by relevance → Display results → Save to persistent storage
+- **Success criteria**: Successfully retrieves projects, AI scores relevance, displays high-quality matches (60%+ score), persists between sessions
 
-### Impact Ledger Timeline Display
-- **Functionality**: Chronological table of all organizational milestones across three arms, filterable by event type
-- **Purpose**: Demonstrates the flywheel in action by showing how Labs projects lead to consulting engagements that inform policy initiatives
-- **Trigger**: User navigates to Impact Ledger page or filters events by type
-- **Progression**: Load page → Display all events → User selects filter tab → Table updates with filtered events → Metrics remain visible
-- **Success criteria**: Events are chronologically ordered (newest first), filtering is instant, relationships between events are clear through reference IDs
+### Feature 2: Multi-Arm Content Showcase
+- **Functionality**: Displays comprehensive information about Labs, Consulting, and Policy initiatives
+- **Purpose**: Communicates the flywheel model and demonstrates real-world impact
+- **Trigger**: Navigation through site pages
+- **Progression**: Land on home → Understand flywheel → Explore specific arm → View projects/case studies → See metrics
+- **Success criteria**: Clear value proposition, quantified outcomes visible, logical flow between arms
 
-### Project Showcase with Categorization
-- **Functionality**: Displays both open-source Labs projects and client consulting engagements with clear visual differentiation
-- **Purpose**: Shows how proven open-source tools are adapted for paying clients, validating the Labs → Consulting pipeline
-- **Trigger**: User navigates to Labs or Consulting pages
-- **Progression**: Load page → Display project grid → User reads descriptions and metrics → Can identify origin (labs vs. client) and status
-- **Success criteria**: Projects are visually distinct by origin, metrics are prominently displayed, technical details are accessible but not overwhelming
+### Feature 3: Impact Ledger
+- **Functionality**: Chronological record of milestones with filtering by type
+- **Purpose**: Provides transparent evidence of organizational impact
+- **Trigger**: Navigate to Impact page or view latest events on homepage
+- **Progression**: View all events → Filter by type → See metrics → Understand flywheel connections
+- **Success criteria**: Easy filtering, clear metrics, demonstrates interconnected impact
 
-### Policy Memo Status Tracking
-- **Functionality**: Lists policy recommendations with status badges (draft, published, implemented) and links to supporting projects
-- **Purpose**: Demonstrates how consulting results translate into policy advocacy and eventually regulatory change
-- **Trigger**: User navigates to Policy page
-- **Progression**: Load page → Display policy memos → User sees status and jurisdiction → Identifies related projects that provided evidence
-- **Success criteria**: Status is immediately visible, relationships to projects are clear, progression from draft to implemented is understandable
-
-### Flywheel Explanation System
-- **Functionality**: Visual and textual explanation of how the three arms reinforce each other on the homepage
-- **Purpose**: Helps first-time visitors understand the organizational model and value proposition
-- **Trigger**: User lands on homepage
-- **Progression**: Read headline → Scroll to flywheel diagram → Understand cycle: Labs → Consulting → Policy → back to Labs → View latest impact examples
-- **Success criteria**: Concept is clear within 30 seconds, users can articulate how revenue funds research and policy creates demand
+### Feature 4: Project Persistence & Management
+- **Functionality**: Saves discovered projects locally, allows removal and clearing
+- **Purpose**: Enables users to build their own curated collection of relevant projects
+- **Trigger**: Projects auto-save on discovery, manual removal via UI
+- **Progression**: Discover project → Auto-saved → View anytime → Remove if not relevant → Clear all if needed
+- **Success criteria**: Data persists across sessions, removal works instantly, no data loss
 
 ## Edge Case Handling
 
-- **Empty states**: If data arrays are empty (no projects, no impact events), display helpful placeholder messages instead of broken layouts
-- **Mobile navigation**: Navigation collapses to icon-only labels on small screens while maintaining accessibility and clear active states
-- **Long project descriptions**: Text is fully visible without truncation; cards expand vertically to accommodate content
-- **Missing metrics**: Metric sections gracefully hide when no metrics are available for a project or event
-- **Broken references**: If an impact event references a project ID that doesn't exist, fall back to displaying the raw ID rather than breaking
+- **API Rate Limits**: Display friendly error message when GitHub rate limit hit, suggest trying different topic
+- **AI Analysis Failure**: Fallback to default categorization with 50% relevance score if AI unavailable
+- **No Results Found**: Show empty state with helpful guidance to try different topics
+- **Network Errors**: Display specific error message, allow retry without losing state
+- **Large Result Sets**: Limit to 50 stored projects, auto-remove oldest when adding new
+- **Missing Data**: Handle repos without descriptions, topics, or languages gracefully
 
 ## Design Direction
 
-The design should feel institutional yet innovative - professional enough for university administrators and government officials, but modern enough to signal technical competence. Think clean government portals mixed with contemporary SaaS landing pages. Generous whitespace, clear hierarchy, and understated animations that guide attention rather than distract. The interface should recede to let the content (measurable outcomes, real client names, specific policy citations) establish credibility.
+The design should feel **professional and trustworthy** with hints of **innovation and forward-thinking technology**. Balance serious policy/consulting credibility with the excitement of cutting-edge AI research. A minimal interface serves the content best, avoiding decorative elements that might diminish the evidence-based approach. The design should feel **approachable to non-technical policy makers** while maintaining **technical credibility for engineers**.
 
 ## Color Selection
 
-Triadic color scheme using cool, trustworthy tones that avoid the aggressive energy of startup branding while maintaining visual interest through complementary accent colors.
+**Triadic Color Scheme** - Three equally spaced colors create visual distinction between the three arms while maintaining harmony
 
-- **Primary Color** (Deep Blue-Purple): `oklch(0.55 0.18 260)` - Main brand color representing trust, intelligence, and technological sophistication. Used for Labs-related elements, primary CTAs, and the organizational logo.
+The colors evoke trust (cool purple), growth/sustainability (warm yellow-green), and innovation/technology (cool teal). Each arm gets its own color identity within a cohesive system.
 
-- **Secondary Colors**:
-  - Teal-Green: `oklch(0.75 0.12 180)` - Represents growth and sustainability, used for Consulting Studio elements and success metrics
-  - Soft Purple: `oklch(0.65 0.15 300)` - Represents policy and governance, used for Policy Alliance elements and status indicators
+- **Primary Color**: Soft Purple `oklch(0.68 0.14 340)` - Main brand color representing ethical AI and trust. Used for Labs arm, primary CTAs, and focus states.
 
-- **Accent Color** (Soft Purple): `oklch(0.65 0.15 300)` - Used sparingly for important CTAs, active states, and to draw attention to key metrics or achievements
+- **Secondary Colors**: 
+  - Warm Yellow-Green `oklch(0.88 0.10 60)` - Supporting color for Consulting arm, represents growth and practical results
+  - Cool Teal `oklch(0.75 0.12 180)` - Accent for Policy arm, represents innovation and systematic change
+
+- **Accent Color**: Cool Teal `oklch(0.75 0.12 180)` - Attention-grabbing highlight for policy initiatives and interactive AI features
 
 - **Foreground/Background Pairings**:
-  - Background (Near White): `oklch(0.99 0.005 240)` → Foreground (Charcoal): `oklch(0.15 0.02 250)` - Ratio 14.8:1 ✓
-  - Card (Pure White): `oklch(1 0 0)` → Card Foreground (Charcoal): `oklch(0.15 0.02 250)` - Ratio 16.2:1 ✓
-  - Primary (Deep Blue-Purple): `oklch(0.55 0.18 260)` → Primary Foreground (Near White): `oklch(0.99 0.005 240)` - Ratio 6.8:1 ✓
-  - Secondary (Teal-Green): `oklch(0.75 0.12 180)` → Secondary Foreground (Charcoal): `oklch(0.15 0.02 250)` - Ratio 9.2:1 ✓
-  - Accent (Soft Purple): `oklch(0.65 0.15 300)` → Accent Foreground (Near White): `oklch(0.99 0.005 240)` - Ratio 5.4:1 ✓
-  - Muted (Light Gray): `oklch(0.96 0.01 240)` → Muted Foreground (Medium Gray): `oklch(0.45 0.02 250)` - Ratio 7.1:1 ✓
+  - Background (Soft Lavender `oklch(0.98 0.015 320)`): Dark Purple text `oklch(0.22 0.04 280)` - Ratio 14.2:1 ✓
+  - Card (Near White `oklch(0.99 0.008 320)`): Dark Purple text `oklch(0.22 0.04 280)` - Ratio 15.8:1 ✓
+  - Primary (Soft Purple `oklch(0.68 0.14 340)`): Light Background `oklch(0.98 0.015 320)` - Ratio 5.2:1 ✓
+  - Secondary (Warm Yellow-Green `oklch(0.88 0.10 60)`): Dark text `oklch(0.28 0.04 280)` - Ratio 8.9:1 ✓
+  - Accent (Cool Teal `oklch(0.75 0.12 180)`): Dark text `oklch(0.22 0.04 280)` - Ratio 6.1:1 ✓
+  - Muted (Light Purple-Gray `oklch(0.93 0.02 320)`): Medium text `oklch(0.48 0.02 280)` - Ratio 4.8:1 ✓
 
 ## Font Selection
 
-Typography should convey approachability and modernity while maintaining professional legibility. Choose fonts that work well for both technical documentation and executive summaries.
+Typography should convey **modern professionalism with warmth and approachability**, avoiding both sterile corporate feels and overly casual/playful aesthetics. **Quicksand** (rounded sans-serif) for headings provides friendly approachability, **Alegreya** (humanist serif) for emphasis adds credibility, and **JetBrains Mono** for code/technical content ensures clarity.
 
 - **Typographic Hierarchy**:
-  - H1 (Page Titles): Quicksand Bold/48px/tight letter spacing - Clear entry points for each section
-  - H2 (Section Headers): Quicksand SemiBold/30px/normal letter spacing - Delineates major content blocks
-  - H3 (Subsection Headers): Quicksand SemiBold/20px/normal letter spacing - Organizes card content
-  - Body Text: Quicksand Regular/16px/1.6 line-height - Highly readable for longer descriptions
-  - Small Text (Metadata): Quicksand Regular/14px/1.5 line-height - Dates, labels, supporting info
-  - Monospace (Technical): JetBrains Mono Regular/14px - Tech stack tags, project IDs
+  - H1 (Page Titles): Quicksand Bold/48px/tight letter spacing/-0.02em
+  - H2 (Section Titles): Quicksand SemiBold/32px/tight letter spacing/-0.01em
+  - H3 (Card Titles): Quicksand SemiBold/24px/normal letter spacing
+  - H4 (Subsections): Quicksand Medium/16px/normal letter spacing
+  - Body: Quicksand Regular/16px/relaxed line height/1.6em
+  - Small: Quicksand Regular/14px/relaxed line height/1.5em
+  - Code/Metrics: JetBrains Mono Regular/14px/normal line height/1.4em
 
 ## Animations
 
-Animations should be minimal and purposeful, primarily serving to smooth transitions and guide attention. The institutional audience expects polish but not playfulness.
+**Subtle and purposeful** animations enhance navigation clarity and provide feedback without drawing attention to themselves. Every motion serves a functional purpose: confirming interactions, guiding attention to new content, or maintaining spatial context during transitions. The balance leans heavily toward **subtle functionality** with occasional **micro-delights** in high-impact moments like successful project discovery.
 
-- **Purposeful Meaning**: Motion reinforces the flywheel concept - elements flow from one arm to another, status badges transition smoothly, page changes feel connected rather than abrupt
+- **Purposeful Meaning**: Animations communicate state changes (loading → success), spatial relationships (tabs sliding), and system responsiveness (button presses). Color transitions on discovery cards celebrate successful AI analysis.
+
 - **Hierarchy of Movement**: 
-  - High priority: Page transitions and route changes (smooth, directional)
-  - Medium priority: Hover states on cards and buttons (subtle scale/border changes)
-  - Low priority: Metric pill appearances (no animation, instant display)
+  - Primary: Loading states during AI analysis (prominent spinner, progress indication)
+  - Secondary: Tab transitions, card hover states (subtle scale/shadow)
+  - Tertiary: Badge appearances, button micro-interactions (minimal)
 
 ## Component Selection
 
-- **Components**: 
-  - Cards (shadcn) - Primary content container for projects, policy memos, and process steps; modified with thicker borders on hover to increase interactivity feedback
-  - Badge (shadcn) - Status indicators, tech stack tags, metric pills; used extensively with variant customization
-  - Button (shadcn) - CTAs and navigation links; minimal customization, rely on variant system
-  - Table (shadcn) - Impact Ledger display; modified with enhanced row hover states and responsive column hiding
-  - Tabs (shadcn) - Impact Ledger filtering; default styling maintained
-  - Navigation (custom) - Built from scratch using React Router Link components with active state detection
+- **Components**:
+  - **Navigation**: Custom header with React Router Links, sticky positioning, active state indicators
+  - **Cards**: shadcn Card for projects, case studies, policy memos - modified with border-2 for prominence
+  - **Tabs**: shadcn Tabs for Labs (Our Projects vs AI Discovery) and Impact Ledger filtering
+  - **Buttons**: shadcn Button with variants (default, outline, ghost) - generous padding for touch targets
+  - **Badges**: shadcn Badge for status, categories, metrics - custom color variants for categories
+  - **Select**: shadcn Select for topic chooser in discovery tool
+  - **Progress**: shadcn Progress for relevance score visualization
+  - **Alert**: shadcn Alert for error states
+  - **Table**: shadcn Table for Impact Ledger chronological display
 
 - **Customizations**:
-  - MetricPill - Custom component combining Badge with specific layout for label:value pairs
-  - SectionCard - Reusable card pattern with icon, title, description, and CTA button
-  - ImpactTable - Table wrapper with custom type-based styling and icon integration
-  - LayoutShell - Full layout component with persistent header/footer navigation
+  - **DiscoveredProjectCard**: Custom component combining Card, Progress, and Badges with color-coded categories
+  - **ImpactTable**: Custom table wrapper with icon-based type indicators
+  - **MetricPill**: Custom Badge variant optimized for displaying quantified outcomes
+  - **SectionCard**: Custom Card optimized for three-arm showcase with consistent layout
 
 - **States**:
-  - Buttons: Default has solid background, hover shows subtle brightness increase, active shows slight scale down, focus has visible ring
-  - Cards: Default has thin border, hover shows thicker primary-colored border and shadow, maintains consistent padding
-  - Navigation links: Inactive shows muted text, hover shows background fill, active shows primary background with white text and filled icon
-  - Badges: Status badges use color-coding (default for active/implemented, secondary for published, outline for draft)
+  - **Buttons**: Subtle scale on hover (1.02), pressed state (0.98), disabled with opacity and cursor change
+  - **Cards**: Border color transition on hover (primary), shadow depth increase, slight lift effect
+  - **Inputs/Select**: Focus ring with primary color, border color transition, placeholder text with muted foreground
+  - **Loading**: Spinner with rotation animation, skeleton states for async content, progress bars for multi-step operations
 
 - **Icon Selection**:
-  - Flask (Labs) - Represents experimentation and scientific approach
-  - Briefcase (Consulting) - Professional services and client work
-  - Scroll (Policy) - Governance and regulatory frameworks
-  - ChartLineUp (Impact) - Metrics and measurable outcomes
-  - Rocket (Pilots/Deployments) - Launch events and active implementations
-  - ArrowsClockwise (Flywheel) - Reinforcing cycle concept
+  - **Labs**: Flask (duotone) - represents experimentation
+  - **Consulting**: Briefcase (duotone) - represents business services  
+  - **Policy**: Scroll (duotone) - represents legislation/documentation
+  - **Impact**: ChartLineUp (duotone) - represents growth/measurement
+  - **Discovery**: Sparkle (fill), MagnifyingGlass (duotone) - represents AI-powered search
+  - **GitHub**: GitBranch (bold) - represents repositories
+  - **Actions**: ArrowRight (bold), Plus (bold), X (regular) - directional and CRUD operations
+  - **Status**: CheckCircle (fill), Clock (duotone), Rocket (duotone) - state indicators
 
-- **Spacing**: Consistent spacing using Tailwind scale: 2px gaps in metric pills, 8px gaps in badge groups, 24px gaps in card grids, 64px gaps between major sections, 128px top/bottom page padding
+- **Spacing**: 
+  - Page padding: px-4 sm:px-6 lg:px-8 (responsive)
+  - Section gaps: gap-8 md:gap-12 lg:gap-20 (increasing with viewport)
+  - Card internal: p-6 for content, p-4 for headers/footers
+  - Component gaps: gap-2 (tight), gap-4 (standard), gap-8 (sections)
 
 - **Mobile**: 
-  - Navigation switches to icon-only labels below 640px
-  - Card grids collapse to single column below 768px
-  - Table hides metrics column below 1024px (still visible in card view)
-  - Page padding reduces from 32px to 16px on mobile
-  - Typography scales down: H1 to 40px, H2 to 24px on mobile
+  - Navigation collapses to icon-only on small screens, labels visible sm+
+  - Grid layouts: 1 column mobile, 2 columns md+, 3 columns for feature showcases on lg+
+  - Tab lists: Full width on mobile with equal distribution, compact on desktop
+  - Cards: Full width mobile with adequate padding, 2-column grid md+
+  - Tables: Hide non-essential columns on mobile (metrics), show on lg+
+  - Font sizes: Slightly reduced on mobile (H1: 40px → 48px at sm+)
+  - Touch targets: Minimum 44x44px for all interactive elements
+  - Discovery filters: Stack vertically on mobile, horizontal on sm+

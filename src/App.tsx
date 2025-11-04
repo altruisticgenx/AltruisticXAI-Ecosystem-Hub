@@ -4,6 +4,7 @@ import LabsPage from "@/pages/LabsPage"
 import ConsultingPage from "@/pages/ConsultingPage"
 import PolicyPage from "@/pages/PolicyPage"
 import ImpactLedgerPage from "@/pages/ImpactLedgerPage"
+import { Toaster } from "@/components/ui/sonner"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="/policy" element={<PolicyPage />} />
         <Route path="/impact-ledger" element={<ImpactLedgerPage />} />
       </Routes>
+      <Toaster />
     </BrowserRouter>
   )
 }
