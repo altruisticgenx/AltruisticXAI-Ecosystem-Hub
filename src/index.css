@@ -35,14 +35,14 @@
     --sidebar-accent-foreground: oklch(0.25 0.02 45);
     --sidebar-border: oklch(0.88 0.02 85);
     --sidebar-ring: oklch(0.48 0.12 75);
-    --radius: 1rem;
+    --radius: 0.25rem;
     --shadow-color: oklch(0.48 0.12 75);
     --shadow-opacity: 0.08;
     --shadow-blur: 20px;
     --shadow-spread: 4px;
     --shadow-offset-x: 0px;
     --shadow-offset-y: 10px;
-    --spacing: 0.20rem;
+    --spacing: 0.25rem;
 }
 
 body {
