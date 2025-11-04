@@ -1,35 +1,35 @@
 export interface Project {
-  id: string
-  title: string
-  description: string
+  title: str
+  sector: strin
+  origin: "labs" | "c
   sector: string
   techStack: string[]
   origin: "labs" | "consulting" | "internal"
   slug: string
-  status: "active" | "archived" | "pilot"
-  client?: string
-  tags?: string[]
-  metrics?: {
-    label: string
-    value: string
-  }[]
-  clientName?: string
   annual_savings_usd?: number
-  payback_months?: number
-  short_kpi_summary?: string
-}
+  short_kpi_summa
 
-export const projects: Project[] = [
   {
-    id: "1",
-    title: "Campus Energy Explainability Dashboard",
-    description: "An interactive dashboard that visualizes real-time energy consumption patterns across university facilities, providing transparent insights into usage trends, peak demand periods, and carbon footprint metrics. Empowers administrators and students to make data-driven decisions about energy efficiency.",
-    sector: "Education & Sustainability",
-    techStack: ["React", "D3.js", "TypeScript", "Python", "TimescaleDB"],
-    origin: "labs",
-    slug: "campus-energy-dashboard",
+    title: "Campu
+    sector: "Educ
+    o
     status: "pilot",
-    tags: ["open source", "energy", "explainability", "sustainability", "data visualization"],
+    metrics: [
+      { label: "Buildings
+    ]
+ 
+
+    sector: "AI Ethics & Compliance"
+   
+    status: 
+  },
+    id: "3",
+    description: "A comprehensive, anonym
+    techStack: ["PostgreSQL", "Apache Parquet", "FastAPI", "Jupyter", "Op
+    slug: "open-cam
+    tags: ["open source", "open data
+  {
+    title: "Federated Learning Privacy Framework",
     metrics: [
       { label: "Campuses", value: "3" },
       { label: "Buildings", value: "20" },
@@ -42,11 +42,11 @@ export const projects: Project[] = [
     description: "A privacy-preserving toolkit for auditing AI models without cloud dependencies. Enables organizations to evaluate model fairness, bias, and performance metrics entirely on local infrastructure, ensuring sensitive data never leaves organizational boundaries.",
     sector: "AI Ethics & Compliance",
     techStack: ["Electron", "TensorFlow.js", "SQLite", "Vue.js", "WebAssembly"],
-    origin: "labs",
+    origin: "consul
     slug: "local-ai-audit-toolkit",
-    status: "active",
+    client: "NYU Lang
     tags: ["open source", "AI ethics", "privacy", "bias detection", "compliance"]
-  },
+    
   {
     id: "3",
     title: "Open Campus Energy Dataset",
@@ -78,21 +78,21 @@ export const projects: Project[] = [
     origin: "consulting",
     slug: "nyu-healthcare-ai",
     status: "active",
-    client: "NYU Langone Health",
+  },
     metrics: [
-      { label: "Models Monitored", value: "8" },
+    title: "University Research Data Commons - C
       { label: "Cost Reduction", value: "65%" },
       { label: "Audit Time Saved", value: "120 hrs/mo" }
     ]
-  },
+    
   {
-    id: "6",
+      { labe
     title: "Federal Energy Optimization - GSA",
     description: "Adapted our Campus Energy Dashboard for the General Services Administration to monitor and optimize energy usage across 12 federal buildings in the DC metro area. Achieved 18% energy reduction in first year through behavioral insights and predictive analytics.",
     sector: "Government & Sustainability",
     techStack: ["React", "D3.js", "Python", "PostgreSQL", "AWS"],
     origin: "consulting",
-    slug: "gsa-energy-optimization",
+    description: "Deployed automated
     status: "active",
     client: "U.S. General Services Administration",
     metrics: [
@@ -100,103 +100,103 @@ export const projects: Project[] = [
       { label: "Energy Reduction", value: "18%" },
       { label: "Annual Savings", value: "$450K" },
       { label: "Payback Period", value: "14 months" }
-    ]
+     
   },
-  {
+   
     id: "7",
     title: "Multi-Hospital Federated ML Platform - Northeast Consortium",
     description: "Deployed production federated learning infrastructure enabling 7 hospitals to collaboratively train diagnostic AI models without sharing patient data. First cross-institutional ML collaboration to meet both HIPAA and state-level privacy requirements.",
-    sector: "Healthcare & Privacy",
+    description: "Real-time explain
     techStack: ["PyTorch", "Kubernetes", "PostgreSQL", "FastAPI", "Azure"],
     origin: "consulting",
     slug: "northeast-federated-ml",
-    status: "pilot",
+    clientName: "Sta
     client: "Northeast Healthcare Consortium",
-    metrics: [
+    payback_mo
       { label: "Hospitals", value: "7" },
-      { label: "Patients Protected", value: "1.2M" },
+      { label: "Models Monitored", value: "12" },
       { label: "Model Accuracy Gain", value: "+12%" },
       { label: "Payback Period", value: "18 months" }
     ]
   },
   {
-    id: "8",
+    descript
     title: "University Research Data Commons - California System",
     description: "Established standardized data sharing framework across 9 UC campuses based on our Open Campus Data Licensing Model. Created unified API and governance structure enabling collaborative research while protecting institutional data.",
     sector: "Education & Open Data",
-    techStack: ["FastAPI", "PostgreSQL", "Elasticsearch", "React", "Kubernetes"],
-    origin: "consulting",
-    slug: "uc-research-data-commons",
-    status: "active",
-    client: "University of California System",
-    metrics: [
-      { label: "Campuses", value: "9" },
-      { label: "Datasets", value: "247" },
-      { label: "Research Teams", value: "83" },
-      { label: "Annual Cost Savings", value: "$320K" }
-    ]
-  },
-  {
-    id: "9",
-    title: "AI Procurement Risk Assessment - City of Boston",
-    description: "Deployed automated bias detection and transparency scoring for AI vendors competing for city contracts. System evaluates vendor proposals against ethical AI standards, model explainability requirements, and equity impact criteria before procurement decisions.",
-    sector: "Government & AI Ethics",
-    techStack: ["Python", "scikit-learn", "React", "PostgreSQL", "FastAPI"],
-    origin: "consulting",
-    slug: "boston-ai-procurement",
-    status: "active",
-    clientName: "City of Boston",
-    client: "City of Boston",
-    annual_savings_usd: 280000,
-    payback_months: 8,
-    short_kpi_summary: "Prevented 3 high-risk AI contracts, saved $280K annually in avoided bias remediation costs, reduced procurement review time by 45%",
-    metrics: [
-      { label: "Vendors Evaluated", value: "23" },
-      { label: "High-Risk Flags", value: "3" },
-      { label: "Review Time Reduction", value: "45%" },
-      { label: "Annual Savings", value: "$280K" }
-    ]
-  },
-  {
-    id: "10",
-    title: "Clinical AI Monitoring Platform - Stanford Medicine",
-    description: "Real-time explainability and performance monitoring for 12 clinical decision support AI models across radiology, pathology, and emergency departments. Continuous drift detection, fairness metrics tracking, and automated compliance reporting for FDA and state regulators.",
-    sector: "Healthcare & AI Safety",
-    techStack: ["PyTorch", "TensorBoard", "React", "TimescaleDB", "Kubernetes"],
-    origin: "consulting",
-    slug: "stanford-clinical-ai-monitoring",
-    status: "active",
-    clientName: "Stanford Medicine",
-    client: "Stanford Medicine",
-    annual_savings_usd: 625000,
-    payback_months: 11,
-    short_kpi_summary: "Reduced compliance audit costs by 68%, caught 2 critical model drift events before patient impact, improved clinician trust scores by 34%",
-    metrics: [
-      { label: "Models Monitored", value: "12" },
-      { label: "Drift Events Caught", value: "2" },
-      { label: "Audit Cost Reduction", value: "68%" },
-      { label: "Clinician Trust Increase", value: "+34%" }
-    ]
-  },
-  {
-    id: "11",
-    title: "Supply Chain Transparency Network - Fair Trade Alliance",
-    description: "Blockchain-based traceability system using explainable AI to verify ethical sourcing claims across 140+ coffee and cocoa cooperatives in 8 countries. Enables consumers to verify fair wages, environmental practices, and supply chain transparency via QR codes.",
-    sector: "Ethical Supply Chain & Agriculture",
-    techStack: ["Ethereum", "IPFS", "React Native", "Python", "MongoDB"],
-    origin: "consulting",
-    slug: "fair-trade-supply-chain",
-    status: "pilot",
     clientName: "Fair Trade Alliance",
-    client: "Fair Trade Alliance",
-    annual_savings_usd: 450000,
-    payback_months: 16,
-    short_kpi_summary: "Verified 140+ cooperatives, increased consumer trust by 52%, reduced fraud claims by 89%, generated $450K in operational efficiencies",
-    metrics: [
-      { label: "Cooperatives Verified", value: "140+" },
-      { label: "Countries", value: "8" },
-      { label: "Fraud Reduction", value: "89%" },
-      { label: "Consumer Trust Increase", value: "+52%" }
-    ]
-  }
-]
+    origin: "consulting",
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
