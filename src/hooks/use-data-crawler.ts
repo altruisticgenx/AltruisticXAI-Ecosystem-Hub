@@ -1,15 +1,15 @@
 import { useState, useCallback } from "react"
-import type { Project, GrantOpportunity, Op
+import { useKV } from "@github/spark/hooks"
 import type { Project, GrantOpportunity, OpenDataset } from "@/data/schema"
 
+interface CrawlerData {
+  projects: Project[]
   grants: GrantOpportunity[]
+  datasets: OpenDataset[]
   sources?: string[]
   isLoading: boolean
-}
-async function runFu
-    projects: [] as Project[],
-  isLoading: boolean
   error?: string
+  lastIngestTimestamp?: string
 }
 
 async function runFullIngest() {
@@ -42,34 +42,69 @@ export function useDataCrawler() {
       ...current,
       isLoading: true,
       error: undefined,
-      }
+    }))
 
-        p
+    try {
+      const result = await runFullIngest()
+      setCrawlerData((current = {
+        projects: [],
+        grants: [],
         datasets: [],
-      
         isLoading: false,
+      }) => ({
+        projects: result.projects,
+        grants: result.grants,
+        datasets: result.datasets,
+        sources: result.sources,
+        isLoading: false,
+        lastIngestTimestamp: result.timestamp,
       }))
-      setIsIngestin
+      setIsIngesting(false)
+    } catch (error) {
+      setCrawlerData((current = {
+        projects: [],
+        grants: [],
+        datasets: [],
+        isLoading: false,
+      }) => ({
+        ...current,
+        isLoading: false,
+        error: error instanceof Error ? error.message : "Unknown error occurred",
+      }))
+      setIsIngesting(false)
     }
+  }, [setCrawlerData])
 
-    return (cr
+  const getHighPriorityProjects = useCallback(() => {
+    if (!crawlerData?.projects) return []
+    return crawlerData.projects
+      .filter(p => p.priorityScore && p.priorityScore > 70)
       .slice(0, 10)
+  }, [crawlerData])
 
-    return (crawlerData?.datas
+  const getTopDatasets = useCallback(() => {
+    if (!crawlerData?.datasets) return []
+    return crawlerData.datasets
+      .filter(d => d.relevanceScore && d.relevanceScore > 60)
       .slice(0, 10)
+  }, [crawlerData])
 
+  const getMatchingGrants = useCallback(() => {
     if (!crawlerData?.grants) return []
-    return crawlerData.gr
-      .sort((a, b) => (b.
+    return crawlerData.grants
+      .filter(g => g.alignmentScore && g.alignmentScore > 60)
+      .sort((a, b) => (b.alignmentScore || 0) - (a.alignmentScore || 0))
+  }, [crawlerData])
 
-
+  return {
+    crawlerData,
+    isIngesting,
     runIngest,
-    getHighPriority
+    getHighPriorityProjects,
+    getTopDatasets,
+    getMatchingGrants,
   }
-
-
-
-
+}
 
 
 
