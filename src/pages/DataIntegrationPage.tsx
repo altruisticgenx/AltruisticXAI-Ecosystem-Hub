@@ -680,7 +680,7 @@ export default function DataIntegrationPage() {
                             {dataCoverage && (
                               <p className="text-xs text-muted-foreground">
                                 Data coverage: <span className="font-semibold text-foreground">
-                                  {dataCoverage.from} → {dataCoverage.to}
+                                  {dataCoverage.from} {" → "} {dataCoverage.to}
                                 </span>
                               </p>
                             )}
