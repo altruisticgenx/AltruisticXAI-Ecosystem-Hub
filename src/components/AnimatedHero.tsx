@@ -37,7 +37,7 @@ export function AnimatedBackground() {
         }}
         transition={{
           duration: 20,
-          repeat: Infinity,
+          repeat: Infinity as number,
           ease: "easeInOut",
         }}
       />
@@ -51,7 +51,7 @@ export function AnimatedBackground() {
         }}
         transition={{
           duration: 25,
-          repeat: Infinity,
+          repeat: Infinity as number,
           ease: "easeInOut",
           delay: 2,
         }}
@@ -66,7 +66,7 @@ export function AnimatedBackground() {
         }}
         transition={{
           duration: 18,
-          repeat: Infinity,
+          repeat: Infinity as number,
           ease: "easeInOut",
           delay: 4,
         }}
@@ -87,7 +87,7 @@ export function AnimatedBackground() {
           }}
           transition={{
             duration: particle.duration,
-            repeat: Infinity,
+            repeat: Infinity as number,
             delay: particle.delay,
             ease: "linear",
           }}
@@ -124,7 +124,7 @@ export function GridPattern({ className = "" }: GridPatternProps) {
         }
         transition={{
           duration: 20,
-          repeat: Infinity,
+          repeat: Infinity as number,
           ease: "linear",
         }}
       />
@@ -187,7 +187,7 @@ export function FloatingElement({
       }}
       transition={{
         duration,
-        repeat: Infinity,
+        repeat: Infinity as number,
         ease: "easeInOut",
         delay,
       }}
@@ -224,7 +224,7 @@ export function ShimmerText({ children, className = "" }: ShimmerTextProps) {
       }}
       transition={{
         duration: 8,
-        repeat: Infinity,
+        repeat: Infinity as number,
         ease: "linear",
       }}
     >

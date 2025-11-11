@@ -139,7 +139,6 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-
       <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-12 pt-8 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-12 lg:gap-16 lg:px-8 lg:pb-20 lg:pt-16">
 
         <motion.section 
@@ -160,9 +159,7 @@ export default function HomePage() {
                 open tools
               </span>{" "}
               into{" "}
-              <span className="bg-gradient-to-r from-secondary via-secondary/90 to-accent bg-clip-text text-transparent">
-                policy-backed pilots
-              </span>{" "}
+              <span className="bg-gradient-to-r from-secondary via-secondary/90 to-accent bg-clip-text text-transparent">policy-backed pilots</span>{" "}
               that actually ship.
             </h1>
             
@@ -421,7 +418,7 @@ export default function HomePage() {
         </motion.section>
       </div>
     </LayoutShell>
-  )
+  );
 }
 
 function FlywheelStep({ label, detail }: { label: string; detail: string }) {

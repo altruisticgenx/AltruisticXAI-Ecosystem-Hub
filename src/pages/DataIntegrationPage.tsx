@@ -1,5 +1,5 @@
 import React, { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion, type Variants } from "framer-motion"
 import { toast } from "sonner"
 import LayoutShell from "@/components/LayoutShell"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
@@ -16,6 +16,8 @@ import GrantsAPITest from "@/components/GrantsAPITest"
 import { validateData } from "@/data-ingest/validate"
 
 export default function DataIntegrationPage() {
+  const prefersReducedMotion = useReducedMotion()
+  
   const {
     grants,
     isLoading: grantsLoading,
@@ -326,9 +328,12 @@ export default function DataIntegrationPage() {
                 (grants || []).map((grant, index) => (
                   <motion.div
                     key={grant.grant.id}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ 
+                      delay: prefersReducedMotion ? 0 : index * 0.05,
+                      duration: prefersReducedMotion ? 0 : 0.3
+                    }}
                   >
                     <Card className="overflow-hidden border border-border/50 transition-all hover:border-primary/50 hover:shadow-md">
                       <CardHeader>
@@ -507,9 +512,12 @@ export default function DataIntegrationPage() {
                 (projects || []).map((project, index) => (
                   <motion.div
                     key={project.repo.id}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ 
+                      delay: prefersReducedMotion ? 0 : index * 0.05,
+                      duration: prefersReducedMotion ? 0 : 0.3
+                    }}
                   >
                     <Card className="overflow-hidden border border-border/50 transition-all hover:border-primary/50 hover:shadow-md">
                       <CardHeader>
