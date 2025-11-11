@@ -6,9 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { motion, useReducedMotion, type Variants } from "framer-motion"
 
 const LazyShaderAnimation = lazy(() => 
-  import("@/components/ui/shader-animation").then(module => ({
-    default: module.ShaderAnimation
-  }))
+  import("@/components/ui/shader-animation").then(m => ({ default: m.ShaderAnimation }))
 )
 
 class WebGLErrorBoundary extends Component<
@@ -131,12 +129,12 @@ export function Hero() {
             asChild
             size="default"
             className="font-semibold inline-flex items-center gap-2"
-            aria-label="Book an Ecosystem Intro Call"
           >
             <a
               href="https://scheduler.zoom.us/altruistic-xai/altruisticxai-booking"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="Book an Ecosystem Intro Call (opens in new tab)"
             >
               Book a Call
               <ArrowRight className="w-3.5 h-3.5" weight="bold" />
@@ -148,19 +146,11 @@ export function Hero() {
             size="default"
             variant="outline"
             className="font-medium"
-            aria-label="Explore our solutions"
           >
             Explore Solutions
           </Button>
         </motion.div>
       </motion.div>
-
-      <style>{`
-        @keyframes gradient-shift {
-          0%, 100% { background-position: 0% 50%; }
-          50% { background-position: 100% 50%; }
-        }
-      `}</style>
     </section>
   )
 }
