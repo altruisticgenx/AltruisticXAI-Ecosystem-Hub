@@ -418,7 +418,7 @@ export default function HomePage() {
         </motion.section>
       </div>
     </LayoutShell>
-  );
+  )
 }
 
 function FlywheelStep({ label, detail }: { label: string; detail: string }) {
