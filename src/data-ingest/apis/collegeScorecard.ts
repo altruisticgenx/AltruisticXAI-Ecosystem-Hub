@@ -96,7 +96,7 @@ export async function runCollegeScorecardIngest(): Promise<Project[]> {
         const project: Project = {
           id: `college-${state}-${schoolId}`,
           title: `${schoolName} - Campus Energy Equity Opportunity`,
-          description: `${schoolName} (${school["school.city"]}, ${state}) serves ${size.toLocaleString()} students with ${(pellRate * 100).toFixed(0)}% Pell Grant recipients and ${(firstGen * 100).toFixed(0)}% first-generation students. Equity alignment: ${equityScore}. Prime candidate for equity-focused AI energy pilots and campus sustainability programs with strong community impact narratives.`,
+          description: `${schoolName} (${school["school.city"]}, ${state}) serves ${size.toLocaleString()} students with ${(pellRate * 100).toFixed(0)}% Pell Grant recipients and ${(firstGen * 100).toFixed(0)}% first-generation students. Average net price: $${netPrice.toLocaleString()}. Equity alignment: ${equityScore}. Prime candidate for equity-focused AI energy pilots and campus sustainability programs with strong community impact narratives.`,
           sector: "Education",
           origin: "external",
           status: "active",

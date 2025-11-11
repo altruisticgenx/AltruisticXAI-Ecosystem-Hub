@@ -5,8 +5,16 @@ import { Badge } from '@/components/ui/badge'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { CheckCircle, XCircle, Info } from '@phosphor-icons/react'
 
+interface GrantSearchResponse {
+  opportunities: Array<{
+    opportunityNumber: string
+    opportunityTitle: string
+    agencyName: string
+  }>
+}
+
 export default function GrantsAPITest() {
-  const [data, setData] = useState<any>(null)
+  const [data, setData] = useState<GrantSearchResponse | null>(null)
   const [testing, setTesting] = useState(false)
   const [error, setError] = useState<string | null>(null)
   const [result, setResult] = useState<'success' | 'error' | null>(null)

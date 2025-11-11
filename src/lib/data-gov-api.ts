@@ -23,6 +23,37 @@ export interface DataGovResource {
   lastModified?: string
 }
 
+interface DataGovRawResource {
+  id: string
+  name?: string
+  description?: string
+  format?: string
+  url: string
+  created?: string
+  last_modified?: string
+}
+
+interface DataGovRawTag {
+  name?: string
+  display_name?: string
+}
+
+interface DataGovRawDataset {
+  id: string
+  name: string
+  title?: string
+  notes?: string
+  organization?: {
+    name?: string
+    title?: string
+  }
+  resources?: DataGovRawResource[]
+  tags?: (DataGovRawTag | string)[]
+  metadata_created: string
+  metadata_modified: string
+  landing_page?: string
+}
+
 export interface DataGovSearchResponse {
   count: number
   datasets: DataGovDataset[]
@@ -68,14 +99,14 @@ export async function searchDataGovDatasets(
       throw new Error('Data.gov API request was not successful')
     }
 
-    const datasets: DataGovDataset[] = (data.result?.results || []).map((ds: any) => ({
+    const datasets: DataGovDataset[] = (data.result?.results || []).map((ds: DataGovRawDataset) => ({
       id: ds.id,
       name: ds.name,
       title: ds.title || ds.name,
       description: ds.notes || '',
       organization: ds.organization?.name || 'Unknown',
       organizationTitle: ds.organization?.title || ds.organization?.name || 'Unknown',
-      resources: (ds.resources || []).map((r: any) => ({
+      resources: (ds.resources || []).map((r: DataGovRawResource) => ({
         id: r.id,
         name: r.name || r.description || 'Unnamed Resource',
         description: r.description || '',
@@ -84,7 +115,9 @@ export async function searchDataGovDatasets(
         created: r.created || '',
         lastModified: r.last_modified
       })),
-      tags: (ds.tags || []).map((t: any) => t.name || t.display_name || String(t)),
+      tags: (ds.tags || []).map((t: DataGovRawTag | string) => 
+        typeof t === 'string' ? t : (t.name || t.display_name || '')
+      ),
       metadataCreated: ds.metadata_created,
       metadataModified: ds.metadata_modified,
       url: `https://catalog.data.gov/dataset/${ds.name}`,

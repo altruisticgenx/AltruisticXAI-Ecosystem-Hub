@@ -2,15 +2,6 @@ import { Project, Provenance } from "../../data/schema"
 
 const API_BASE = "https://developer.nrel.gov/api"
 
-interface NRELUtilityRate {
-  utility?: string
-  name?: string
-  state?: string
-  residential?: number
-  commercial?: number
-  industrial?: number
-}
-
 const PRIORITY_STATES = ["ME", "MA", "NH", "VT", "RI", "CT", "PA"]
 
 export async function runNrelIngest(): Promise<Project[]> {
