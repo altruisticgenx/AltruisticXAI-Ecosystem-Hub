@@ -19,4 +19,4 @@ import { ApiClient, defaultClient, ApiResponse, User } from "@repo/lib";
 ## Notes
 
 - This package is private to the repo and meant for local workspace consumption.
-- Replace the default base URL via NEXT_PUBLIC_API_URL or NX_API_URL environment var.
+- Replace the default base URL via VITE_API_URL or NX_API_URL environment var.

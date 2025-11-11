@@ -6,9 +6,9 @@ export type ApiClientOptions = {
 };
 
 const DEFAULT_BASE =
-  process.env.NEXT_PUBLIC_API_URL ||
-  process.env.NX_API_URL ||
-  process.env.API_URL ||
+  (typeof process !== 'undefined' && process.env?.VITE_API_URL) ||
+  (typeof process !== 'undefined' && process.env?.NX_API_URL) ||
+  (typeof process !== 'undefined' && process.env?.API_URL) ||
   "https://api.example.com";
 
 export class ApiClient {

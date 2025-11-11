@@ -31,7 +31,7 @@ git checkout -b "$BRANCH" || git checkout "$BRANCH"
 
 echo ""
 echo "Installing dependencies..."
-npm install
+npm ci
 
 echo ""
 echo "Building packages..."
