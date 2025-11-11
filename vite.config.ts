@@ -19,7 +19,8 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
-      '@': resolve(projectRoot, 'src')
+      '@': resolve(projectRoot, 'src'),
+      '@repo/lib': resolve(projectRoot, 'packages/lib/src')
     }
   },
 });
