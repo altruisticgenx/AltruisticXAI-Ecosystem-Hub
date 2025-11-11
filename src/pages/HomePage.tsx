@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { motion, useReducedMotion, type Variants } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
 import LayoutShell from "@/components/LayoutShell"
+import { Container } from "@/components/Container"
 
 const pillars = [
   {
@@ -139,7 +140,7 @@ export default function HomePage() {
           </div>
         </div>
       </div>
-      <div className="mx-auto flex max-w-6xl flex-col gap-10 px-4 pb-12 pt-8 sm:gap-12 sm:px-6 sm:pb-16 sm:pt-12 lg:gap-16 lg:px-8 lg:pb-20 lg:pt-16">
+      <Container className="flex flex-col gap-10 pb-12 pt-8 sm:gap-12 sm:pb-16 sm:pt-12 lg:gap-16 lg:pb-20 lg:pt-16">
 
         <motion.section 
           className="relative space-y-8 sm:space-y-10 lg:space-y-12"
@@ -469,7 +470,7 @@ export default function HomePage() {
             </Link>
           </Button>
         </motion.section>
-      </div>
+      </Container>
     </LayoutShell>
   );
 }
