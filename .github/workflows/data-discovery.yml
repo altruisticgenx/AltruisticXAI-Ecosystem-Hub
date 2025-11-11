@@ -35,8 +35,8 @@ jobs:
         id: discovery
         run: |
           cat > run-discovery.mjs << 'EOF'
-          import { runEnrichedDiscovery } from './src/data-ingest/orchestrator.ts'
-          import { getDiscoveredProjects, getDiscoveredGrants } from './src/data-ingest/store/storage.ts'
+          import { runEnrichedDiscovery } from './src/data-ingest/orchestrator.js'
+          import { getDiscoveredProjects, getDiscoveredGrants } from './src/data-ingest/store/storage.js'
           
           async function main() {
             const useAI = process.env.USE_AI === 'true'
@@ -120,7 +120,7 @@ jobs:
         if: success()
         run: |
           cat > run-validation.mjs << 'EOF'
-          import { validateData } from './src/data-ingest/validate.ts'
+          import { validateData } from './src/data-ingest/validate.js'
           
           async function main() {
             console.log('\n🔍 Running data validation (2025+ compliance check)...')

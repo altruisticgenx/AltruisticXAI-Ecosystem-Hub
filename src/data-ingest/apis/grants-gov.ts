@@ -1,5 +1,18 @@
 import type { GrantOpportunity, DiscoveryFilters } from '../schema'
 
+interface GrantsGovHit {
+  number: string
+  title: string
+  agency: string
+  synopsis?: string
+  description?: string
+  awardCeiling?: number
+  awardFloor?: number
+  openDate?: string
+  closeDate?: string
+  eligibility?: string[]
+}
+
 const GRANTS_GOV_API_BASE = 'https://www.grants.gov/grantsws/rest/opportunities/search'
 
 export async function fetchGrantsGovOpportunities(
@@ -67,7 +80,7 @@ export async function fetchGrantsGovOpportunities(
   return opportunities
 }
 
-function calculateRelevance(grant: any, filters: DiscoveryFilters): number {
+function calculateRelevance(grant: GrantsGovHit, filters: DiscoveryFilters): number {
   let score = 0.5
   
   const text = `${grant.title} ${grant.synopsis || ''} ${grant.description || ''}`.toLowerCase()
@@ -90,7 +103,7 @@ function calculateRelevance(grant: any, filters: DiscoveryFilters): number {
   return Math.min(score, 1.0)
 }
 
-function categorizeSector(grant: any): string[] {
+function categorizeSector(grant: GrantsGovHit): string[] {
   const text = `${grant.title} ${grant.synopsis || ''}`.toLowerCase()
   const sectors: string[] = []
   
@@ -103,7 +116,7 @@ function categorizeSector(grant: any): string[] {
   return sectors.length > 0 ? sectors : ['multi']
 }
 
-function extractKeywords(grant: any): string[] {
+function extractKeywords(grant: GrantsGovHit): string[] {
   const keywords: string[] = []
   const text = `${grant.title} ${grant.synopsis || ''}`.toLowerCase()
   

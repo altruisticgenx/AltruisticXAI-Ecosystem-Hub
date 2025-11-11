@@ -3,13 +3,18 @@
 import { useEffect, useRef } from "react"
 import * as THREE from "three"
 
+interface ShaderUniforms {
+  time: { type: string; value: number }
+  resolution: { type: string; value: THREE.Vector2 }
+}
+
 export function ShaderAnimation() {
   const containerRef = useRef<HTMLDivElement>(null)
   const sceneRef = useRef<{
     camera: THREE.Camera
     scene: THREE.Scene
     renderer: THREE.WebGLRenderer
-    uniforms: any
+    uniforms: ShaderUniforms
     animationId: number
   } | null>(null)
 

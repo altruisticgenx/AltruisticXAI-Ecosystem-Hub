@@ -15,6 +15,7 @@ export default function LayoutShell({ children }: LayoutShellProps) {
   const isMobile = useIsMobile()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
+  // Close mobile menu when route changes
   useEffect(() => {
     setMobileMenuOpen(false)
   }, [location.pathname])

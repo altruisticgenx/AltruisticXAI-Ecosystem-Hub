@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Database, Money, Sparkle, Download, ArrowSquareOut, FileText, Calendar, Buildings, GitBranch, Lightning, CheckCircle } from "@phosphor-icons/react"
+import { Database, Money, Sparkle, Download, ArrowSquareOut, Calendar, GitBranch, Lightning, CheckCircle } from "@phosphor-icons/react"
 import { useGrantDiscovery, GrantCategory } from "@/hooks/use-grant-discovery"
 import { useDiscoveredProjects } from "@/hooks/use-discovered-projects"
 import { useDataCrawler } from "@/hooks/use-data-crawler"
 import GrantsAPITest from "@/components/GrantsAPITest"
-import { validateData } from "@/data-ingest/validate"
+import { validateData, ValidationResult } from "@/data-ingest/validate"
 
 export default function DataIntegrationPage() {
   const {
@@ -22,7 +22,6 @@ export default function DataIntegrationPage() {
     loadingStage: grantsStage,
     error: grantsError,
     discoverGrants,
-    toggleStar,
     removeGrant,
     clearAll: clearGrants
   } = useGrantDiscovery()
@@ -46,7 +45,7 @@ export default function DataIntegrationPage() {
 
   const [selectedGrantCategory, setSelectedGrantCategory] = useState<GrantCategory>('energy-ai')
   const [selectedProjectTopic, setSelectedProjectTopic] = useState<string>('local-first AI energy')
-  const [validationResult, setValidationResult] = useState<any>(null)
+  const [validationResult, setValidationResult] = useState<ValidationResult | null>(null)
   const [isValidating, setIsValidating] = useState(false)
   
   const handleRunCrawler = async () => {

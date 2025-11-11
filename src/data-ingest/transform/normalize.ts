@@ -1,7 +1,7 @@
 import type { IngestedProject, GrantOpportunity } from '../schema'
 
 declare const spark: {
-  llmPrompt: (strings: TemplateStringsArray, ...values: any[]) => string
+  llmPrompt: (strings: TemplateStringsArray, ...values: unknown[]) => string
   llm: (prompt: string, modelName?: string, jsonMode?: boolean) => Promise<string>
 }
 
@@ -70,6 +70,6 @@ function deduplicateTags(tags: string[]): string[] {
   return [...new Set(tags.map(t => t.toLowerCase()))]
 }
 
-function isProject(item: any): item is IngestedProject {
+function isProject(item: IngestedProject | GrantOpportunity): item is IngestedProject {
   return 'sector' in item && !('opportunity_number' in item)
 }

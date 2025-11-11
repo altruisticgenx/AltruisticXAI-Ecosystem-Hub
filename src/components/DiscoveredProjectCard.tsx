@@ -2,7 +2,7 @@ import { DiscoveredProject } from "@/hooks/use-discovered-projects"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
-import { GitBranch, Star, GithubLogo, X, Lightbulb } from "@phosphor-icons/react"
+import { Star, GithubLogo, X, Lightbulb } from "@phosphor-icons/react"
 
 interface DiscoveredProjectCardProps {
   project: DiscoveredProject

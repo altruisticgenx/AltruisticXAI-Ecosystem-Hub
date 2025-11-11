@@ -2,16 +2,9 @@ import { Project, Provenance } from "../../data/schema"
 
 const API_BASE = "https://api.eia.gov/v2"
 
-interface EIASeriesData {
-  seriesId?: string
-  name?: string
-  description?: string
-  geography?: string
-  units?: string
-  data?: Array<{
-    period: string
-    value: number
-  }>
+interface EIADataPoint {
+  period: string
+  value: number
 }
 
 const PRIORITY_STATES = ["ME", "MA", "NH", "VT", "RI", "CT", "PA"]
@@ -85,7 +78,7 @@ export async function runEiaIngest(): Promise<Project[]> {
         }
 
         const recentData = data.slice(0, 3)
-        const avgValue = recentData.reduce((sum: number, item: any) => sum + (parseFloat(item.value) || 0), 0) / recentData.length
+        const avgValue = recentData.reduce((sum: number, item: EIADataPoint) => sum + (parseFloat(String(item.value)) || 0), 0) / recentData.length
         const trend = recentData.length >= 2 
           ? ((recentData[0].value - recentData[recentData.length - 1].value) / recentData[recentData.length - 1].value * 100)
           : 0
