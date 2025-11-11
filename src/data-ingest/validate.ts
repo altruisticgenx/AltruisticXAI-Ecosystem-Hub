@@ -14,10 +14,6 @@ export interface ValidationResult {
   }
 }
 
-interface HasId {
-  id: string
-}
-
 interface HasDate {
   id: string
   effectiveDate?: string
