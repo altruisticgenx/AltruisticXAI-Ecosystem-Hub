@@ -3,21 +3,31 @@ import LayoutShell from "@/components/LayoutShell"
 import ImpactTable from "@/components/ImpactTable"
 import CrawledProjectCard from "@/components/CrawledProjectCard"
 import { impactEvents, ImpactEvent } from "@/data/impactEvents"
-import { ChartLineUp, Rocket, Scroll, BookOpen, Handshake, Database, CloudArrowDown, CheckCircle, CalendarBlank } from "@phosphor-icons/react"
+import { ChartLineUp, Rocket, Scroll, BookOpen, Database, CloudArrowDown, CheckCircle, CalendarBlank } from "@phosphor-icons/react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { useDataCrawler } from "@/hooks/use-data-crawler"
 import { toast } from "sonner"
-import { validateData } from "@/data-ingest/validate"
+import { validateData, ValidationResult } from "@/data-ingest/validate"
 
-function getLastUpdated(crawlerData: any) {
+interface CrawlerData {
+  lastIngestTimestamp?: string
+  projects?: Array<{ effectiveDate?: string }>
+}
+
+interface CrawlerData {
+  lastIngestTimestamp?: string
+  projects?: Array<{ effectiveDate?: string }>
+}
+
+function getLastUpdated(crawlerData: CrawlerData | null) {
   if (!crawlerData?.lastIngestTimestamp) return null
   return new Date(crawlerData.lastIngestTimestamp).toISOString().slice(0, 10)
 }
 
-function getCoverage(projects: any[]) {
+function getCoverage(projects: Array<{ effectiveDate?: string }>) {
   const dates: Date[] = []
 
   projects.forEach((p) => {
@@ -41,7 +51,7 @@ function getCoverage(projects: any[]) {
 export default function ImpactLedgerPage() {
   const { crawlerData, isIngesting, runIngest, getHighPriorityProjects } = useDataCrawler()
   const [isValidating, setIsValidating] = useState(false)
-  const [validationResult, setValidationResult] = useState<any>(null)
+  const [validationResult, setValidationResult] = useState<ValidationResult | null>(null)
   
   const allEvents = impactEvents as ImpactEvent[]
   const pilotEvents = allEvents.filter(e => e.type === "pilot")

@@ -7,9 +7,7 @@ import {
   RefreshCw, 
   Sparkles,
   Feather,
-  X,
   ChevronRight,
-  Quote,
   Zap,
   Send
 } from 'lucide-react';
@@ -426,7 +424,7 @@ function IntentoolGame() {
         const text = candidate.content.parts[0].text;
         
         // Try to parse the text or use it directly
-        let newSource = {
+        const newSource = {
           id: new Date().getTime(),
           type: "Real-Time Example",
           content: text,

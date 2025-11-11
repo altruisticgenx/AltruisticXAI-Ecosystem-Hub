@@ -19,6 +19,26 @@ export interface GrantOpportunity {
   alignmentReason?: string
 }
 
+interface GrantsGovRawOpportunity {
+  opportunityID?: string
+  opportunityNumber?: string
+  opportunityTitle?: string
+  agencyName?: string
+  agencyCode?: string
+  synopsis?: string
+  description?: string
+  closeDate?: string
+  awardCeiling?: number
+  awardFloor?: number
+  estimatedTotalProgramFunding?: number
+  opportunityCategory?: string
+  fundingInstrumentType?: string
+  eligibleApplicants?: string[]
+  additionalInfo?: string
+  cfda?: string
+  opportunityStatus?: string
+}
+
 export interface GrantsSearchResponse {
   totalRecords: number
   opportunities: GrantOpportunity[]
@@ -65,7 +85,7 @@ export async function searchGrantOpportunities(
       return { opportunities: [], totalRecords: 0 }
     })
     
-    const opportunities: GrantOpportunity[] = (data.opportunities || []).map((opp: any) => {
+    const opportunities: GrantOpportunity[] = (data.opportunities || []).map((opp: GrantsGovRawOpportunity) => {
       const oppNumber = opp.opportunityNumber || opp.opportunityID || `UNK-${Math.random().toString(36).substr(2, 9)}`
       
       return {
