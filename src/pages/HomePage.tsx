@@ -181,15 +181,7 @@ export default function HomePage() {
             </a>
           </motion.div>
 
-          <motion.div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap" variants={itemVariants} transition={itemTransition}>
-            <Button 
-              asChild 
-              size="lg"
-              className="w-full rounded-full bg-primary text-sm font-semibold shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl hover:scale-105 active:scale-[0.98] sm:w-auto sm:px-8"
-            >
-              <Link to="/consulting">Book an Ecosystem Intro Call</Link>
-            </Button>
-          </motion.div>
+
 
           <motion.div 
             className="flex flex-wrap gap-2 text-[11px] sm:hidden" 
