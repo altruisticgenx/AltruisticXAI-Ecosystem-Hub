@@ -1,5 +1,5 @@
-import { CreativeEyesHero } from "@/components/creative-eyes-hero"
+import CreativeEyesHeroNew from "@/components/CreativeEyesHeroNew"
 
 export default function CreativeEyesDemo() {
-  return <CreativeEyesHero />
+  return <CreativeEyesHeroNew />
 }
