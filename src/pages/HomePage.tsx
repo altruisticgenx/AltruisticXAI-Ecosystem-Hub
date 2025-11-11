@@ -187,20 +187,7 @@ export default function HomePage() {
               size="lg"
               className="w-full rounded-full bg-primary text-sm font-semibold shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl hover:scale-105 active:scale-[0.98] sm:w-auto sm:px-8"
             >
-              <Link to="/consulting">
-                Book an Ecosystem Intro Call
-              </Link>
-            </Button>
-            <Button 
-              asChild 
-              variant="outline" 
-              size="lg"
-              className="group w-full rounded-full border-border text-sm font-semibold shadow-sm transition-all hover:border-primary hover:bg-primary/5 hover:text-primary hover:shadow-md active:scale-[0.98] sm:w-auto sm:px-8"
-            >
-              <Link to="/impact-ledger" className="flex items-center gap-1.5">
-                Browse the Impact Ledger
-                <ArrowRight size={16} className="transition-transform group-hover:translate-x-0.5" />
-              </Link>
+              <Link to="/consulting">Book an Ecosystem Intro Call</Link>
             </Button>
           </motion.div>
 
