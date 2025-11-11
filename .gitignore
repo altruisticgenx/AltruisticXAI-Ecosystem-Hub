@@ -13,6 +13,10 @@ dist-ssr
 *-dist
 *.local
 
+# Package build artifacts
+packages/*/dist
+packages/*/.tsbuildinfo
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -26,7 +30,6 @@ dist-ssr
 
 .env
 **/agent-eval-report*
-packages
 pids
 .file-manifest
 .devcontainer/

@@ -6,11 +6,13 @@
     "scripts": {
         "dev": "vite",
         "kill": "fuser -k 5000/tcp",
-        "build": "tsc -b --noCheck && vite build",
+        "build": "npm run build:packages && tsc -b --noCheck && vite build",
+        "build:packages": "npm run build --workspace=packages/lib --if-present && npm run build --workspace=packages/ui --if-present",
         "lint": "eslint .",
         "optimize": "vite optimize",
         "preview": "vite preview",
-        "discover": "node scripts/discover.mjs"
+        "discover": "node scripts/discover.mjs",
+        "test": "echo \"No tests configured yet\""
     },
     "dependencies": {
         "@github/spark": "^0.39.0",
@@ -86,6 +88,7 @@
         "eslint": "^9.28.0",
         "eslint-plugin-react-hooks": "^7.0.1",
         "eslint-plugin-react-refresh": "^0.4.19",
+        "glob": "^11.0.3",
         "globals": "^16.0.0",
         "tailwindcss": "^4.1.11",
         "typescript": "~5.7.2",
