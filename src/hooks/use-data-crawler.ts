@@ -79,12 +79,7 @@ export function useDataCrawler() {
 
     try {
       const result = await runFullIngest()
-      setCrawlerData((current = {
-        projects: [],
-        grants: [],
-        datasets: [],
-        isLoading: false,
-      }) => ({
+      setCrawlerData(() => ({
         projects: result.projects,
         grants: result.grants,
         datasets: result.datasets,

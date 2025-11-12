@@ -2,6 +2,28 @@ import { Project, GrantOpportunity, PolicyMemo, ImpactEvent } from "../data/sche
 
 const MIN_DATE = new Date("2025-01-01T00:00:00Z")
 
+export interface ValidationResult {
+  valid: boolean
+  errors: string[]
+  warnings: string[]
+  stats: {
+    projects: number
+    grants: number
+    policies: number
+    events: number
+  }
+}
+
+interface HasDate {
+  id: string
+  effectiveDate?: string
+  posting_date?: string
+  close_date?: string
+  postedDate?: string
+  closeDate?: string
+  date?: string
+}
+
 function parseIso(dateStr?: string | null): Date | null {
   if (!dateStr) return null
   const d = new Date(dateStr)
@@ -40,9 +62,9 @@ export async function validateData() {
   }
 
   const checkDateField = (
-    list: any[],
+    list: HasDate[],
     label: string,
-    getter: (x: any) => string | undefined,
+    getter: (x: HasDate) => string | undefined,
   ) => {
     for (const item of list) {
       const raw = getter(item)

@@ -1,7 +1,7 @@
 import type { IngestedProject, GrantOpportunity } from '../schema'
 
 declare const spark: {
-  llmPrompt: (strings: TemplateStringsArray, ...values: any[]) => string
+  llmPrompt: (strings: TemplateStringsArray, ...values: unknown[]) => string
   llm: (prompt: string, modelName?: string, jsonMode?: boolean) => Promise<string>
 }
 
@@ -34,15 +34,21 @@ export async function enrichWithAI(
   if (!apiKey) return item
 
   try {
-    const prompt = spark.llmPrompt`Analyze this ${isProject(item) ? 'project' : 'grant opportunity'} and provide:
-1. A 1-sentence summary focusing on innovation and impact
-2. Relevance score (0-1) for local-first AI, campus energy, or regenerative systems
-3. Primary sector classification
+    const itemType = isProject(item) ? 'project' : 'grant'
+    const title = item.title
+    const description = item.description
 
-Title: ${item.title}
-Description: ${item.description.slice(0, 500)}
+    const prompt = spark.llmPrompt`Analyze this ${itemType} and provide a JSON response with the following structure:
+{
+  "summary": "A concise 1-2 sentence summary of the project/grant",
+  "sector": "Primary sector (e.g., AI/ML, Energy, Healthcare, etc.)",
+  "relevance_score": 0.0-1.0 score indicating overall relevance and impact potential
+}
 
-Return as JSON with fields: summary, relevance_score, sector`
+Title: ${title}
+Description: ${description}
+
+Return only valid JSON.`
 
     const result = await spark.llm(prompt, 'gpt-4o', true)
     const enriched = JSON.parse(result)
@@ -70,6 +76,6 @@ function deduplicateTags(tags: string[]): string[] {
   return [...new Set(tags.map(t => t.toLowerCase()))]
 }
 
-function isProject(item: any): item is IngestedProject {
+function isProject(item: IngestedProject | GrantOpportunity): item is IngestedProject {
   return 'sector' in item && !('opportunity_number' in item)
 }

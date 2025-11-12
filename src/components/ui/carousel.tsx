@@ -94,6 +94,7 @@ function Carousel({
     setApi(api)
   }, [api, setApi])
 
+  // Initialize carousel state with onSelect callback
   useEffect(() => {
     if (!api) return
     onSelect(api)

@@ -68,10 +68,10 @@ Return as JSON: { "projects": [{ repoId, relevanceScore, category, ... }, ...] }
 
   try {
     const response = await window.spark.llm(batchPromptText, 'gpt-4o', true)
-    const parsed = JSON.parse(response)
+    const parsed = JSON.parse(response) as { projects?: Array<Partial<ProjectAnalysis> & { repoId: number }> }
     
     if (parsed.projects && Array.isArray(parsed.projects)) {
-      parsed.projects.forEach((item: any) => {
+      parsed.projects.forEach((item) => {
         const analysis: ProjectAnalysis = {
           relevanceScore: item.relevanceScore || 50,
           category: item.category || 'general-ethics',

@@ -88,7 +88,7 @@ export default function ImpactTable({ events }: ImpactTableProps) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {events.map((event, index) => {
+          {events.map((event) => {
             const config = typeConfig[event.type]
             const Icon = config.icon
 

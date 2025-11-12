@@ -1,28 +1,30 @@
 import React, { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion, type Variants } from "framer-motion"
 import { toast } from "sonner"
 import LayoutShell from "@/components/LayoutShell"
+import { Container } from "@/components/Container"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Alert, AlertDescription } from "@/components/ui/alert"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Database, Money, Sparkle, Download, ArrowSquareOut, FileText, Calendar, Buildings, GitBranch, Lightning, CheckCircle } from "@phosphor-icons/react"
+import { Database, Money, Sparkle, Download, ArrowSquareOut, Calendar, GitBranch, Lightning, CheckCircle } from "@phosphor-icons/react"
 import { useGrantDiscovery, GrantCategory } from "@/hooks/use-grant-discovery"
 import { useDiscoveredProjects } from "@/hooks/use-discovered-projects"
 import { useDataCrawler } from "@/hooks/use-data-crawler"
 import GrantsAPITest from "@/components/GrantsAPITest"
-import { validateData } from "@/data-ingest/validate"
+import { validateData, ValidationResult } from "@/data-ingest/validate"
 
 export default function DataIntegrationPage() {
+  const prefersReducedMotion = useReducedMotion()
+  
   const {
     grants,
     isLoading: grantsLoading,
     loadingStage: grantsStage,
     error: grantsError,
     discoverGrants,
-    toggleStar,
     removeGrant,
     clearAll: clearGrants
   } = useGrantDiscovery()
@@ -46,7 +48,7 @@ export default function DataIntegrationPage() {
 
   const [selectedGrantCategory, setSelectedGrantCategory] = useState<GrantCategory>('energy-ai')
   const [selectedProjectTopic, setSelectedProjectTopic] = useState<string>('local-first AI energy')
-  const [validationResult, setValidationResult] = useState<any>(null)
+  const [validationResult, setValidationResult] = useState<ValidationResult | null>(null)
   const [isValidating, setIsValidating] = useState(false)
   
   const handleRunCrawler = async () => {
@@ -135,7 +137,7 @@ export default function DataIntegrationPage() {
 
   return (
     <LayoutShell>
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8 lg:py-16">
+      <Container className="py-8 sm:py-12 lg:py-16">
         <div className="mb-12 text-center sm:mb-16">
           <div className="mb-4 flex justify-center">
             <div className="flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-accent/15 to-accent/5 shadow-lg ring-1 ring-accent/20">
@@ -326,9 +328,12 @@ export default function DataIntegrationPage() {
                 (grants || []).map((grant, index) => (
                   <motion.div
                     key={grant.grant.id}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ 
+                      delay: prefersReducedMotion ? 0 : index * 0.05,
+                      duration: prefersReducedMotion ? 0 : 0.3
+                    }}
                   >
                     <Card className="overflow-hidden border border-border/50 transition-all hover:border-primary/50 hover:shadow-md">
                       <CardHeader>
@@ -507,9 +512,12 @@ export default function DataIntegrationPage() {
                 (projects || []).map((project, index) => (
                   <motion.div
                     key={project.repo.id}
-                    initial={{ opacity: 0, y: 20 }}
+                    initial={{ opacity: 0, y: prefersReducedMotion ? 0 : 20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.05 }}
+                    transition={{ 
+                      delay: prefersReducedMotion ? 0 : index * 0.05,
+                      duration: prefersReducedMotion ? 0 : 0.3
+                    }}
                   >
                     <Card className="overflow-hidden border border-border/50 transition-all hover:border-primary/50 hover:shadow-md">
                       <CardHeader>
@@ -813,7 +821,7 @@ export default function DataIntegrationPage() {
             </div>
           </TabsContent>
         </Tabs>
-      </div>
+      </Container>
     </LayoutShell>
   )
 }

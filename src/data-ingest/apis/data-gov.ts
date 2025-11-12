@@ -1,5 +1,22 @@
 import type { IngestedProject, DiscoveryFilters } from '../schema'
 
+interface DataGovTag {
+  name: string
+}
+
+interface DataGovOrganization {
+  title?: string
+}
+
+interface DataGovDataset {
+  id: string
+  name: string
+  title: string
+  notes?: string
+  organization?: DataGovOrganization
+  tags?: DataGovTag[]
+}
+
 const DATA_GOV_API_BASE = 'https://catalog.data.gov/api/3/action'
 
 export async function fetchDataGovDatasets(
@@ -48,7 +65,7 @@ export async function fetchDataGovDatasets(
                 state: extractState(dataset),
                 region: extractRegion(dataset)
               },
-              tags: dataset.tags?.map((t: any) => t.name) || [],
+              tags: dataset.tags?.map((t: DataGovTag) => t.name) || [],
               status: 'active',
               relevance_score: relevanceScore,
               api_source: 'data.gov',
@@ -66,7 +83,7 @@ export async function fetchDataGovDatasets(
   return projects
 }
 
-function calculateDatasetRelevance(dataset: any, filters: DiscoveryFilters): number {
+function calculateDatasetRelevance(dataset: DataGovDataset, filters: DiscoveryFilters): number {
   let score = 0.4
   
   const text = `${dataset.title} ${dataset.notes || ''}`.toLowerCase()
@@ -93,7 +110,7 @@ function calculateDatasetRelevance(dataset: any, filters: DiscoveryFilters): num
   return Math.min(score, 1.0)
 }
 
-function determineSector(dataset: any): IngestedProject['sector'] {
+function determineSector(dataset: DataGovDataset): IngestedProject['sector'] {
   const text = `${dataset.title} ${dataset.notes || ''}`.toLowerCase()
   
   if (text.match(/energy|solar|wind|renewable|efficiency|grid/)) return 'energy'
@@ -105,7 +122,7 @@ function determineSector(dataset: any): IngestedProject['sector'] {
   return 'multi'
 }
 
-function extractState(dataset: any): string | undefined {
+function extractState(dataset: DataGovDataset): string | undefined {
   const states = [
     'maine', 'vermont', 'new hampshire', 'massachusetts', 'rhode island', 'connecticut',
     'california', 'texas', 'new york', 'florida'
@@ -122,7 +139,7 @@ function extractState(dataset: any): string | undefined {
   return undefined
 }
 
-function extractRegion(dataset: any): string | undefined {
+function extractRegion(dataset: DataGovDataset): string | undefined {
   const text = `${dataset.title} ${dataset.notes || ''}`.toLowerCase()
   
   if (text.match(/new england|northeast/)) return 'New England'
