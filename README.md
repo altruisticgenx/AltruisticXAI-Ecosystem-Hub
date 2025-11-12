@@ -20,7 +20,7 @@ A comprehensive platform showcasing the three-arm approach to ethical AI: Open S
 See [DATA_FRESHNESS_2025.md](./DATA_FRESHNESS_2025.md) and [DATA_VALIDATION_2025.md](./DATA_VALIDATION_2025.md) for complete details.
 
 ### Core Platform
-- **Multi-page Application**: Home, Labs, Consulting, Policy, and Impact Ledger
+- **Multi-page Application**: Home, Labs, Consulting, Policy, Impact Ledger, and **Ripples**
 - **Responsive Design**: Mobile-first approach with progressive enhancement
 - **Real-time Data**: Integration with GitHub API and Grants.gov API
 - **AI-Powered Analysis**: Automatic relevance scoring and categorization of discovered projects and grants
@@ -56,6 +56,40 @@ See [DATA_FRESHNESS_2025.md](./DATA_FRESHNESS_2025.md) and [DATA_VALIDATION_2025
 - **AI Analysis**: Automated alignment scoring for discovered grants
 - **Multi-Source Crawler**: Unified ingestion from Grants.gov, GitHub, Data.gov, and more
 - **Persistent Storage**: Save and track promising opportunities across sessions
+
+### Ripples: Truth Supply Chain
+
+**What it is:** A community that turns claim-checking into training data for truth-seeking AI.
+
+**The Inversion:** Build the Truth, not the App. Instead of shipping an app and hoping for meaning later, we create a *truth supply chain* first: workflows, evidence standards, and community norms. The UI comes after the epistemology.
+
+#### Core Features
+
+**1. Truth**  
+A stance, not a slogan. Claims are tied to evidence, provenance, and falsifiability. In practice: every statement links to a source, uncertainty is labeled, and updates are logged.
+
+**2. People (The Foundry)**  
+Recruitment as metallurgy. We test for structural properties (reasoning under pressure, value alignment) with a **Binary Filter**: pass/fail prompts, not glossy portfolios. You're selecting for value-alignment over credentials—aligned minds > resumes. Result: fewer people, tighter mesh.
+
+**3. Practice (The Intentool)**  
+The core product loop. Users translate "lie → truth" in small, auditable steps using three honesty lenses (Realist, Empath, Skeptic). Those labeled transformations become training data. Daily reps build the muscle: check a claim, trace a source, write a small correction, log an uncertainty. Process > vibes.
+
+**Human practice → dataset → better AI → faster practice.** A flywheel.
+
+#### How it works
+
+1. **Begin the Search** → Enter a claim or use "Find Real-Time Example" (powered by Gemini with Google Search Grounding)
+2. **Select a Lens** → Choose your honesty profile: Realist, Empath, or Skeptic
+3. **Translate** → Rewrite deceptive text into honest, clear communication
+4. **Get Feedback** → Chat with the AI "Honesty Coach" for iterative improvement
+5. **Verify Signal** → Submit your translation to the dataset
+6. **Earn Score** → Leaderboard tracks: Evidence × Reproducibility ÷ Corrections against you
+
+#### Why it matters
+
+Small, honest actions compound. Publish tiny artifacts (notes, decisions, sources) that create downstream effects—**signal beats hype**. Mechanism: public commits/notes → visible deltas → trust accrues.
+
+**We make the honest path faster than the performative one.**
 
 ## Tech Stack
 
@@ -120,6 +154,113 @@ The platform includes an intelligent project discovery system that:
 - Responsible AI
 - Interpretable ML
 
+## Ripples: Deep Dive
+
+### The Philosophy
+
+Ripples inverts the traditional startup model. Instead of:
+1. Build app → Launch → Hope for users → Pray for meaning
+
+We do:
+1. **Define epistemology** → Build truth workflows → Recruit aligned people → UI emerges naturally
+
+### The Three Pillars
+
+#### 1. Truth (The Foundation)
+Not a marketing slogan—a structural commitment:
+- **Every claim** → links to source
+- **Every uncertainty** → explicitly labeled
+- **Every update** → logged with provenance
+- **Every correction** → tracked and attributed
+
+This creates *verifiable deltas*: small, public changes that compound trust.
+
+#### 2. People (The Foundry)
+Traditional hiring asks "Where did you work?"  
+The Foundry asks "How do you reason under uncertainty?"
+
+**Binary Filter Examples:**
+- "I believe a healthy system prioritizes **evidence** over **consensus**."
+- "I work best when the goal is **clarity** rather than **growth**."
+
+Pass/fail. No negotiation. No resume polish. Just structural alignment.
+
+#### 3. Practice (The Intentool)
+The core training loop converts self-work into labeled data:
+
+**Input (Noise)**:  
+Corporate jargon, political spin, influencer hype, dark patterns
+
+**Transformation**:  
+Apply an honesty lens (Realist/Empath/Skeptic)
+
+**Output (Signal)**:  
+Clear, honest, falsifiable statement
+
+**Feedback Loop**:  
+Chat with AI Honesty Coach → Iterate → Verify → Add to dataset
+
+**Example Transformation:**
+
+| Source Type | Input (Noise) | Lens | Output (Signal) |
+|------------|---------------|------|-----------------|
+| Corporate Jargon | "We are right-sizing our resource allocation" | Realist | "We are laying off 200 employees" |
+| Political Spin | "We saw a 20% productivity increase" | Skeptic | "Tech sector productivity rose 20%, national average was flat" |
+| Influencer Hype | "This literally cures everything!" | Empath | "This helped me manage symptoms. Your results may vary." |
+
+### The Flywheel
+
+```
+Human translates lie → truth
+    ↓
+Translation becomes labeled data point
+    ↓
+Dataset trains AI to detect deception
+    ↓
+AI helps humans translate faster
+    ↓
+More translations = better AI
+```
+
+### Real-Time Grounding
+
+The "Find Real-Time Example" feature uses **Gemini 2.0 Flash + Google Search Grounding** to:
+1. Search the live web for recent deceptive text
+2. Extract source, author, and context
+3. Present it as a new challenge
+
+This ensures the training data stays current and diverse.
+
+### Technical Architecture
+
+**Frontend**: React + TypeScript  
+**State**: React hooks + Spark KV (persistent storage)  
+**AI**: Gemini API with system instructions (Honesty Coach persona)  
+**Data Flow**: 
+- User input → Gemini analysis → Chat UI → User iteration → Dataset entry
+
+**Key Files**:
+- `src/pages/RipplesPage.tsx` - Main UI and chat logic
+- `DECEPTIVE_SOURCES` - 15 curated examples across 15 deception categories
+- `HONESTY_PROFILES` - 3 lenses for translation
+
+### What Makes It Work
+
+**1. Tiny Artifacts**  
+Each translation is small (1-3 sentences). Low friction = high volume.
+
+**2. Public Accountability**  
+All contributions are attributed. Your score = Evidence × Reproducibility ÷ Corrections.
+
+**3. Gamification Without Toxicity**  
+Leaderboard rewards rigor, not hot takes. Negative points for sloppy claims that others have to correct.
+
+**4. Immediate Feedback**  
+AI Honesty Coach responds conversationally. No waiting, no judgment—just iterative improvement.
+
+**5. Aligned Incentives**  
+The honest path is faster and more rewarding than the performative path.
+
 ## Project Structure
 
 ```
@@ -160,6 +301,7 @@ src/
 │   ├── ConsultingPage.tsx
 │   ├── PolicyPage.tsx
 │   ├── ImpactLedgerPage.tsx
+│   ├── RipplesPage.tsx           # Truth supply chain & Intentool
 │   └── DataIntegrationPage.tsx  # Grant & project discovery
 ├── App.tsx
 └── index.css
@@ -201,12 +343,31 @@ src/
 - Clear all discoveries with "Clear All"
 - Discoveries persist between sessions
 
+### Using Ripples (Truth Supply Chain)
+1. Navigate to `/ripples`
+2. **Truth Tab**: Read the manifesto on building the truth supply chain first
+3. **People Tab (The Foundry)**: Complete the Binary Filter to find value-aligned collaborators
+   - Fill in the mad-lib style prompts about your structural values
+   - Broadcast your signal to find resonance with others
+4. **Practice Tab (The Intentool)**: Train your honesty muscle
+   - Click "⚡ Find Real-Time Example" to get live deceptive text from the web (powered by Gemini + Google Search)
+   - Or work with curated examples of corporate jargon, political spin, and marketing hype
+   - Select an honesty lens: Realist, Empath, or Skeptic
+   - Translate the deceptive text into honest, clear communication
+   - Click "✨ Get Feedback" to start a conversation with the AI Honesty Coach
+   - Iterate on your translation through chat
+   - Click "Verify Signal" to submit your translation to the dataset
+
+**Result**: Each verified translation becomes a training data point. You're teaching AI what honesty looks like through deliberate practice.
+
 ## Development
 
 The application uses Vite for development and builds. All AI and API functionality works in the browser with no backend required.
 
 ### API Rate Limits
 - GitHub API: 60 requests/hour (unauthenticated)
+- Grants.gov API: Standard federal API rate limits apply
+- Gemini API (for Ripples): Configured via environment, used for AI feedback and real-time grounding
 - Spark LLM: Based on user's quota
 
 ### Future Enhancements
@@ -216,3 +377,5 @@ The application uses Vite for development and builds. All AI and API functionali
 - Create custom project collections
 - Integration with academic databases
 - Policy recommendation generator using AI
+- **Ripples Leaderboard**: Track evidence quality, reproducibility, and corrections
+- **Ripples Community**: Public attribution system with contributor scoring
