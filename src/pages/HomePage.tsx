@@ -197,24 +197,10 @@ export default function HomePage() {
                   <span>View Impact Ledger</span>
                 </Link>
               </div>
+            </motion.div>
 
-          <motion.div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap" variants={itemVariants} transition={itemTransition}>
-            <Button 
-              asChild 
-              variant="glow"
-              size="xs"
-            >
-              <Link to="/consulting" className="flex items-center">
-                <ArrowRight size={14} />
-                <span>Book an Ecosystem Intro Call</span>
-              </Link>
-            </Button>
-            <Button 
-              asChild 
-              variant="outline" 
-              size="lg"
-              className="group w-full rounded-full border-border text-sm font-semibold shadow-sm transition-all hover:border-primary hover:bg-primary/5 hover:text-primary hover:shadow-md active:scale-[0.98] sm:w-auto sm:px-8"
-            >
+            <motion.div className="lg:col-span-5" variants={itemVariants} transition={itemTransition}>
+              <div className="grid gap-4 sm:grid-cols-1">
               <Card className="border-primary/20 bg-gradient-to-br from-primary/5 to-transparent p-6 shadow-lg">
                 <div className="space-y-3">
                   <div className="flex items-center gap-3">
@@ -265,6 +251,7 @@ export default function HomePage() {
                   </p>
                 </div>
               </Card>
+              </div>
             </motion.div>
           </div>
         </motion.section>
