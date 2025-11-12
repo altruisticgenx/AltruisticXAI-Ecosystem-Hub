@@ -2,6 +2,9 @@
 
 A comprehensive platform showcasing the three-arm approach to ethical AI: Open Source Labs, Consulting Studio, and Policy Alliance. Features real-time AI-powered project discovery and analysis of open-source ethical AI initiatives.
 
+> 📚 **New to the project?** See [DOCS_INDEX.md](./DOCS_INDEX.md) for a complete guide to all documentation.  
+> 🚀 **Want to deploy?** See [DEPLOYMENT_CHECKLIST.md](./DEPLOYMENT_CHECKLIST.md) for quick setup steps.
+
 ## Features
 
 ### 🎯 2025+ Data Guarantee
@@ -748,6 +751,12 @@ This creates positive pressure toward rigor over speed.
 ## Development
 
 The application uses Vite for development and builds. All AI and API functionality works in the browser with no backend required.
+
+### Deployment
+
+For deploying to GitHub Pages, see [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md).
+
+For Supabase integration (future analytics/user content), see [SUPABASE_SETUP.md](./SUPABASE_SETUP.md).
 
 ### API Rate Limits
 - GitHub API: 60 requests/hour (unauthenticated)
