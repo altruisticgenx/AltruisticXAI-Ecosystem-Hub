@@ -1,21 +1,20 @@
 {
-    "name": "spark-template",
+    "name": "altruisticxai-ecosystem",
     "private": true,
-    "version": "0.0.0",
+    "version": "0.1.0",
     "type": "module",
+    "engines": {
+        "node": ">=20.11.0",
+        "npm": ">=10.5.0"
+    },
     "scripts": {
         "dev": "vite",
-        "kill": "fuser -k 5000/tcp",
-        "build": "npm run build:packages && tsc -b --noCheck && vite build",
-        "build:packages": "npm run build --workspace=packages/lib --if-present && npm run build --workspace=packages/ui --if-present",
-        "lint": "eslint .",
-        "optimize": "vite optimize",
-        "preview": "vite preview",
-        "discover": "node scripts/discover.mjs",
-        "test": "echo \"No tests configured yet\""
+        "build": "vite build",
+        "preview": "vite preview", 
+        "lint": "eslint ."
     },
     "dependencies": {
-        "@github/spark": "^0.39.0",
+        "@github/spark": "^0.39.144",
         "@heroicons/react": "^2.2.0",
         "@hookform/resolvers": "^5.2.2",
         "@octokit/core": "^6.1.4",
